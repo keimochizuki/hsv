@@ -144,12 +144,12 @@ if (!is.null(usperframe)) {
 for (filename in infiles) {
 	f <- file(filename, open = "r+b")
 
-	if (!is.NULL(usperframe)) {
+	if (!is.null(usperframe)) {
 		seek(f, where = 32, rw = "w")
 		writeBin(usperframe, f, endian = "little")
 	}
 
-	if (!is.NULL(rate)) {
+	if (!is.null(rate)) {
 		seek(f, where = 128, rw = "w")
 		writeBin(scale, f, endian = "little")
 		writeBin(rate, f, endian = "little")
