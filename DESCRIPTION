@@ -1,0 +1,30 @@
+Type: Package
+Package: hsv
+Title: Read and Analyze Neural Activities Acquired by TEMPO System
+Version: 0.1.0
+Date: 2025-03-09
+Authors@R:
+	person("Kei", "Mochizuki", email = "k31mczk-git@yahoo.co.jp", role = c("aut", "cre"))
+Description: The htb package offers functions to perform
+	neuroscientific analyses on single-neuron activity.
+	The functions were originally constructed to work on files with .htb extension
+	acquired with TEMPO system, for which the package was named.
+	(Thus this package does not have anything to do with
+	Hokkaido Television Broadcasting, LOL.)
+	Although TEMPO system itself has already become somewhat ancient legacy,
+	these functions can be still utilized to perform old-school analyses
+	on neuronal activity data obtained with other recording platforms.
+License: GPL (>= 3)
+URL: https://github.com/keimochizuki/htb
+BugReports: https://github.com/keimochizuki/htb/issues
+Imports:
+	grDevices,
+	graphics,
+	stats,
+	utils
+Suggests:
+	testthat
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
