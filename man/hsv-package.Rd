@@ -6,13 +6,13 @@
 \alias{hsv-package}
 \title{This is test description in hsv-package.R file.}
 \description{
-The htb package offers functions to perform neuroscientific analyses on single-neuron activity. The functions were originally constructed to work on files with .htb extension acquired with TEMPO system, for which the package was named. (Thus this package does not have anything to do with Hokkaido Television Broadcasting, LOL.) Although TEMPO system itself has already become somewhat ancient legacy, these functions can be still utilized to perform old-school analyses on neuronal activity data obtained with other recording platforms.
+The hsv package offers easy front-end to handle avi video files through FFmpeg software. The functions were originally created for personal uses of the author and (mainly) my colleagues to analyze high-speed videos recorded in our experiments. (Thus this package has nothing to do with Hue-Saturation-Lightness color space, nor Herpes Simplex Virus.) Of course, the package can also be used in handling normal videos. Although the package is still under the construction and testing, it is already usable and thus the author decided to publish it open. Since hsv package is correctly a mere front-end to ffmpeg.exe, installation of FFmpeg software is mandatory before using this package.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/keimochizuki/htb}
-  \item Report bugs at \url{https://github.com/keimochizuki/htb/issues}
+  \item \url{https://github.com/keimochizuki/hsv}
+  \item Report bugs at \url{https://github.com/keimochizuki/hsv/issues}
 }
 
 }

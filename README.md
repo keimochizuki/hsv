@@ -1,6 +1,6 @@
 # hsv package
 
-A set of R functions to edit avi video files with FFmpeg.
+R package to edit avi video files with FFmpeg.
 For quick starter, see [Quick starter](#quick-starter) section.
 
 
@@ -17,27 +17,19 @@ However, it can also be exploited to handle normal avi files.
 [^nameorigin]: This relation to "high-speed video" files lies
 as an origin of the package name "hsv".
 It is thus not related to Hue-Saturation-Lightness color space,
-nor Herpes Simplex Virus\:innocent:
+nor Herpes Simplex Virus.
 
-This package is composed of `.R` files
-that contain definition of functions for statistical environment **R**.
-These R functions work in a collaboration with **FFmpeg**,
+The functions in this package work in a collaboration with **FFmpeg**,
 which is a classical open-source and cross-platform
 media converter software.
 FFmpeg is a commandline CUI (Character User Interface) software
 with enormous complicated options,
 which must be beyond the control of beginners.
-Thus, the author decided to utilize R
-to prepare appropriate command passed to FFmpeg
-by tidying up bothersome frame-to-time translation
+Thus, the author used R to prepare appropriate command
+passed to FFmpeg by tidying up bothersome frame-to-time translation
 and other error managements.
-
-The package also contains a few example `.R` scripts
-in `example` directory.
-Users can learn basic methods to use hsv package
-from these examples.
-Also use the comments at the top of these scripts
-to see what they are doing.
+Therefore, installation of FFmpeg is necessary before
+start using hsv pakcage.
 
 
 
@@ -71,12 +63,18 @@ if not, see http://www.gnu.org/licenses/.
 
 Below is a quick guide to start using
 (and also to update) hsv package on your computer.
-Step 1 (installation of FFmpeg) is needed only at the very beginning
+Step 1 (installation of FFmpeg) and 2 are needed only at the very beginning
 when you first start using this package.
-Step 2 and 3 are needed every time you update the package,
-in addition to your first occasion.
+Step 3 (installation of hsv package) is needed every time you update
+the package, in addition to your first occasion.
 During daily analyses, you normally start from step 4 to prepare
 using the functions in hsv package.
+
+The author personally use Unix-based operating system for every
+daily use, and thus is not familiar with other systems.
+However, by considering the de facto standard,
+I assume Windows operating system for most users' environment
+during the rest of this guide.
 
 
 ### 1. Install FFmpeg
@@ -87,91 +85,95 @@ just follow the instruction in [Installing FFmpeg](#installing-ffmpeg) section
 to get it.
 
 
-### 2. Locate hsv functions
+### 2. Prepare GitHub access on R
 
-Copy and paste the whole directory of this package
-to anywhere of your choice on your computer.
-As an obvious convention in programming and computer science,
-the path should not contain multi-byte characters.
-(Thus, Japanese kanji account name on your operating system is a "guilty"
-in programming.
-You should create a new ascii-named account in that case.
-Also avoid using a directory named "新しいフォルダー[^newfolder]"
-as a temporary workspace.)
-The path should not also contain special characters such as `#` and `&`
-that may confuse some applications in certain conditions.
-Traditionally it may be better to avoid spaces in the path, too,
-but it depends on the circumstances.
+If you have any experience in using R,
+you may know that you can install many contributing packages
+through R console's [Install package(s)...] procedure.
+However, that can be done only for packages which are
+officially listed on R's website (CRAN, or Comprehensive R Archive Network).
+Since hsv package is the author's personal product,
+it is not available on standard GUI menu on R console.
 
-[^newfolder]: Default folder name on Japanese version of Windows system
+The code of this package is published (as you are currently reading)
+on GitHub website.
+Fortunately, there is a functionality for R to install
+miscellaneous packages:
+`install_github()` function in devtools package.
+Therefore, in this step, you first prepare devtools package
+for your R, and by using it,
+you will be installing hsv package in the next step.
 
+Please launch R console.
+Because you are installing additional files in system directories,
+it may be better to right-click the R icon and launch it with
+"Run as administrator" option.
+Then, install devtools package with normal procedure.
+This can be done either from the [Install package(s)...]
+from [Packages] tab in the menu bar,
+or by typing
 
-### 3. Modify `hsvSourceAll.R`
-
-Within the directory you placed,
-there are multiple `.R` files.
-Each file contains a definition of one function of this package.
-You need to `source` all of these files every time when you
-launch R session and use this package.
-This is bothersome.
-But fortunately, there comes an `.R` script named `hsvSourceAll.R`
-in the same directory.
-This script automatically `source`s all of these definition files
-located in a designated directory.
-
-To exploit this functionality, you first need to designate
-a proper directory you located hsv package on your disk.
-Open `hsvSourceAll.R` file with a text editor of your own choice.
-You will see a declaration of variable named `dir`
-in the very beginning of the lines.
-This should be the full-path of hsv package,
-so modify it to fit your occasion.
-For example, if you put this package in your home directory
-on Windows system, then the first line normally becomes like follows.
-
-```r:hsvSourceAll.R
-dir <- "C:/Users/username/Documents/hsv"
+```r
+install.packages("devtools")
 ```
 
-Alternatively, if you put this package just under your `D:` drive,
-then this line should simply read as follows.
+on the console.
+Since devtools depend on plenty of other packages,
+installation of all those dependencies is performed
+together automatically.
+After this, you will be able to use devtools package
+on your R console.
+As mentioned above, this process is basically required
+only for once.
 
-```r:hsvSourceAll.R
-dir <- "D:/hsv"
+
+### 3. Install hsv package
+
+Now you are ready to install hsv package from
+the author's GitHub.
+Use `install_github()` function to do this on the R console.
+(This process may better be done as administrator, too,
+but it depends on your usage.)
+
+```r
+devtools::install_github("keimochizuki/hsv")
 ```
 
 
-### 4. Launch R
+### 4. Launch R and load the package
 
-Start R, either as a GUI (Graphical User Interface) application
-or on your commandline terminal.
+Start R, then use `library()` to load hsv package
+like when you use other official packages.
 
-
-### 5. Source hsv functions
-
-Load the definition of hsv functions by using `hsvSourceAll.R` script.
-If you are working on standard GUI version of R,
-you can `source` the file by just drag-and-dropping
-the file icon to R's console window.
+```r
+library("hsv")
+```
 
 
-### 6. Start your analyses
+### 5. Start your analyses
 
 Now you are ready to use hsv functions
 and start your own analyses.
+To check that the package and FFmpeg are properly available,
+you can test whether `hsvCheckFFmpeg()` function as below.
 
-Note that hsv functions (except `hsvSourceAll.R` as mentioned above)
-are **NOT intended to be directly modified by users**.
-Even if you change the definition of these functions,
-your modification will be lost upon the next update
-of hsv package by the author.
-Therefore, users should prepare their own R-script files
-to perform the analyses,
-instead of modifying the hsv functions per se.
-Please learn how you can utilize each function
-based on the example R scripts that come with the package
-(included in `example` directory).
+```r
+> hsvCheckFFmpeg()
+[1] TRUE
+```
 
+You can see a list of functions in the package typing
+
+```r
+help(package = hsv)
+```
+
+as usual.
+Help for each function is also available with `?` operator.
+
+```r
+?hsvChangeFrameRate
+```
 
 
 ## Tips for reading FFmpeg output
@@ -448,7 +450,7 @@ Close all the windows when these procedures were finished.
 
 As you have added the path to `ffmpeg.exe` to the environment variable,
 the command should now be available on the terminal.
-Congratulations!\:tada:
+Congratulations!
 You have finished installing FFmpeg.
 
 Try `ffmpeg -version` on your terminal and
@@ -523,8 +525,9 @@ You can consider purchasing the PRO license for contined use, though.
 
 
 ---
-## Version history
+## Pre-release version history
 
+- 2025.03.09 Organized as R package and released on GitHub.
 - 2025.03.05 `hsvStackAvi()` now supports three or more multiple stacking
              (since we did need to compare three movie clips at once
              in our analysis).
