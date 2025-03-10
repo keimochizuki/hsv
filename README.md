@@ -12,7 +12,8 @@ created by Kei Mochizuki.
 It was created to edit avi video files,
 especially those recorded with high-speed video system
 in the author's laboratory[^nameorigin].
-However, it can also be exploited to handle normal avi files.
+However, the package can also be exploited to deal with
+normal avi files.
 
 [^nameorigin]: This relation to "high-speed video" files lies
 as an origin of the package name "hsv".
@@ -28,7 +29,7 @@ which must be beyond the control of beginners.
 Thus, the author used R to prepare appropriate command
 passed to FFmpeg by tidying up bothersome frame-to-time translation
 and other error managements.
-Therefore, installation of FFmpeg is necessary before
+Naturally, installation of FFmpeg is necessary before
 start using hsv pakcage.
 
 
@@ -89,16 +90,17 @@ to get it.
 
 If you have any experience in using R,
 you may know that you can install many contributing packages
-through R console's [Install package(s)...] procedure.
+through R console's [Install package(s)...] menu.
 However, that can be done only for packages which are
 officially listed on R's website (CRAN, or Comprehensive R Archive Network).
 Since hsv package is the author's personal product,
-it is not available on standard GUI menu on R console.
+it is not available on CRAN,
+and standard GUI (Graphical User Interface) installation is not supported.
 
 The code of this package is published (as you are currently reading)
 on GitHub website.
 Fortunately, there is a functionality for R to install
-miscellaneous packages:
+miscellaneous packages from GitHub:
 `install_github()` function in devtools package.
 Therefore, in this step, you first prepare devtools package
 for your R, and by using it,
@@ -107,7 +109,7 @@ you will be installing hsv package in the next step.
 Please launch R console.
 Because you are installing additional files in system directories,
 it may be better to right-click the R icon and launch it with
-"Run as administrator" option.
+[Run as administrator] option.
 Then, install devtools package with normal procedure.
 This can be done either from the [Install package(s)...]
 from [Packages] tab in the menu bar,
@@ -118,6 +120,8 @@ install.packages("devtools")
 ```
 
 on the console.
+You may need to select a mirror server to use
+during this process.
 Since devtools depend on plenty of other packages,
 installation of all those dependencies is performed
 together automatically.
@@ -132,18 +136,60 @@ only for once.
 Now you are ready to install hsv package from
 the author's GitHub.
 Use `install_github()` function to do this on the R console.
-(This process may better be done as administrator, too,
-but it depends on your usage.)
+This process may better be done as administrator, too,
+but it depends on your usage.
 
 ```r
 devtools::install_github("keimochizuki/hsv")
 ```
 
+The function automatically fetch the content of hsv package
+through the internet, and install it to
+the same directory to other official packages.
+Since (at least until now) no package is named "hsv" on CRAN,
+there should not be a naming conflict.
+It may take a few seconds before you see a typical message
+like below.
+
+```r
+> devtools::install_github("keimochizuki/hsv")
+WARNING: Rtools is required to build R packages, but is not currently installed.
+
+Please download and install Rtools 4.4 from https://cran.r-project.org/bin/windows/Rtools/.
+Downloading GitHub repo keimochizuki/hsv@HEAD
+── R CMD build ──────────
+WARNING: Rtools is required to build R packages, but is not currently installed.
+
+Please download and install Rtools 4.4 from https://cran.r-project.org/bin/windows/Rtools/.
+✓  checking for file 'C:\Users\username\AppData\Local\Temp\Rtmp...'
+─  preparing 'hsv':
+✓  checking DESCRIPTION meta-information
+─  checking for LF line-endings in source and make files and shell scripts
+─  checking for empty or unneeded directories
+    Omitted 'LazyData' from DESCRIPTION
+─  building 'hsv_0.1.0.tar.gz'
+
+* installing *source* package 'hsv' ...
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (hsv)
+```
+
+The final line `DONE (hsv)` says that the package was
+correctly installed.
+
 
 ### 4. Launch R and load the package
 
 Start R, then use `library()` to load hsv package
-like when you use other official packages.
+like when you use ordinary packages.
 
 ```r
 library("hsv")
@@ -154,8 +200,8 @@ library("hsv")
 
 Now you are ready to use hsv functions
 and start your own analyses.
-To check that the package and FFmpeg are properly available,
-you can test whether `hsvCheckFFmpeg()` function as below.
+To check that the package and FFmpeg are properly installed,
+you can use `hsvCheckFFmpeg()` function as below.
 
 ```r
 > hsvCheckFFmpeg()
@@ -237,8 +283,8 @@ Input #0, avi, from 'input.avi':
 
 These lines present an overall properties of the input video
 such as duration, pixel resolution, bit rate and frame rate.
-For instance, as mentioned above, you can see that
-the frame rate (fps) of the input video in this example was 30.30 frames/s.
+For instance, you can see that the frame rate (fps, frames per second)
+of the input video in this example was 30.30 as mentioned above.
 
 
 ### Stream mapping
@@ -257,10 +303,10 @@ For example, a standard movie clip is normally composed of
 one video stream and one audio stream.
 But there are movies that have selectable multiple audio streams.
 (Imagine a multilingual broadcasting program, for instance.)
-Since FFmpeg is really high-spec multimedia editor,
+Since FFmpeg is a high-spec multimedia editor,
 it can take multiple input files and merge arbitrary combination
 of their streams into an output file.
-Thus the mapping between input and output is shown in this field.
+The mapping between these input and output streams is shown in this field.
 
 Having said that, however, `hsvClipAvi()` function basically just takes over
 the stream(s) of the input to the output.
@@ -304,7 +350,7 @@ until the command is finished.
 
 As previously noted, `hsvClipAvi()` perform only clipping of the input
 with no conversion.
-Therefore, this conversion process will end in a blink of an eye,
+Therefore, this conversion process will end very soon,
 with only a few rows.
 Conversely, when you use `hsvStackAvi()` function,
 it takes charge of inevitable video conversion for horizontal/vertical stacking.
@@ -345,12 +391,17 @@ If you do not have FFmpeg ready on your computer,
 follow the quick guide below to install it.
 If you have already had any chance to use FFmpeg before
 and still have it,
-you can skip this process, of course.
+please skip this process.
 
 Since FFmpeg has originated from Unix operating system,
 it does not come with Windows-like installer.
+Users need to locate the software appropriately and
+perform required settings by themselves.
+Although these processes are not that difficult,
+they can seem to be bothersome to beginners.
 If you feel any difficulty, you can also try searching for the internet,
-and you will find several web sites that introduce this process in detail.
+and you will find several web sites that introduce
+how to install FFmpeg in detail.
 
 
 ### 1. Download FFmpeg
@@ -369,7 +420,7 @@ of the official website.
 There can be multiple builds of FFmpeg displayed below the icon.
 Essentially, either will do.
 
-If you chose that from Gyan Doshi, for example,
+If you chose the build by Gyan Doshi, for example,
 you will then face multiple options for download.
 I recommend latest, full master branch build,
 but it will not bring big differences.
@@ -381,7 +432,7 @@ Unzip the downloaded file to get executables.
 If you chose gyan.dev build mentioned above,
 then the file will come with `.7z` compression.
 On modern Windows, `.7z` files can be unzipped by
-just choosing "Extract All..." from the right click menu.
+just choosing [Extract All...] from the right click menu.
 The extracted (root) directory of FFmpeg normally contains
 `README.txt` and `LICENSE` files,
 together with `bin` and `doc` directories
@@ -396,9 +447,10 @@ I recommend renaming this folder as a simple name like `FFmpeg`.
 You then need to move this folder to a location
 which is suitable for executable applications.
 If you do not have particular reasons,
-putting it simply under the main drive,
+put it simply under the main drive,
 or somewhere standard on your operating system.
-Thus, resulting folder tree will look like below.
+If you choose the former method,
+resulting folder tree will look like below.
 
 ```console
 C:/
@@ -434,21 +486,22 @@ This can be done by adding the path to this directory
 in the system's **environment variable**.
 
 On Windows, open up [System] \> [About] window from the start menu.
-Somewhere you will see [Advanced system settings] around.
-It will then open [Advanced] tab of [System Properties] dialog.
-At the right bottom corner,
+Somewhere in the window, you will find [Advanced system settings] button.
+By pushing it, a new [System Properties] dialog will appear
+with its [Advanced] tab open.
+At the right bottom corner of this window,
 there is a button that reads [Environment Variables...].
-By clicking it, you can finally see a list of environment variables
+By clicking it, you will finally see a list of environment variables
 for your private account (top panel) and for all users (bottom panel).
-Go to [Edit...] of either panel,
-and add the path to the FFmpeg's `bin` directory
+Go [Edit...] the variables in either panel,
+and append the path to the FFmpeg's `bin` directory
 to the values of `Path` variable.
 Close all the windows when these procedures were finished.
 
 
 ### 4. Test `ffmpeg` command
 
-As you have added the path to `ffmpeg.exe` to the environment variable,
+As you have added the path of `bin` directory that contains `ffmpeg.exe`,
 the command should now be available on the terminal.
 Congratulations!
 You have finished installing FFmpeg.
@@ -471,10 +524,10 @@ configuration: --enable-gpl --enable-version3 ...
 ## Additional recommended softwares
 
 Below is a list of other softwares
-which can be handy in analyzing video streams.
+which can be handy in analyzing video files.
 These softwares are not necessary,
-but are recommendation that the author
-usually use by own purpose.
+but are the author's personal recommendation
+that I usually use for my own purpose.
 
 
 ### Media Player Classic
@@ -485,19 +538,18 @@ Media Player Classic (MPC) is completely independent
 and different from Windows Media Player,
 the default useless media player on Windows.
 
-MPC was first created on 2003,
+MPC was first created in 2003,
 at the time of Windows XP.
 It soon became popular by its support of many video codecs
 and light operation.
-Although it then faced a long suspention of development,
-MPC has branched into two different versions that are still alive:
-Home Cinema (MPC-HC) and
-Black Edition (MPC-BE).
+After a long suspention of development,
+MPC has now branched into two different versions that are still alive:
+Home Cinema (MPC-HC) and Black Edition (MPC-BE).
 
 Home Cinema version started after the stall of
 the original MPC around 2007.
-Unfortunately, MPC-HC also became inactive and outdated on 2010s,
-and officially discontinued on 2017.
+Unfortunately, MPC-HC also became inactive and outdated in the 2010s,
+and officially discontinued in 2017.
 Encouraged by many lament voices from the users,
 its update was then resumed by one of the original developers.
 
@@ -521,24 +573,4 @@ Keyframe MP can be obtained freely as a demo and evaluation purpose.
 You can consider purchasing the PRO license for contined use, though.
 
 - Official website: https://zurbrigg.com/keyframe-mp
-
-
-
----
-## Pre-release version history
-
-- 2025.03.09 Organized as R package and released on GitHub.
-- 2025.03.05 `hsvStackAvi()` now supports three or more multiple stacking
-             (since we did need to compare three movie clips at once
-             in our analysis).
-- 2025.03.03 `README.md` was prepared.
-- 2025.03.02 Given a name of "hsv" package while ordering and decomposing
-             the original prototype into well-segmented functions.
-- 2025.02.28 Prototype of the package was constructed which performed
-             clipping and stacking of high-speed videos through FFmpeg,
-             so that we can bypass Adobe Premiere for (at least elementary)
-             video editing.
-- 2025.02.27 The author was asked about the limitation of frame rate choice
-             in Adobe Premiere when exporting edited high-speed videos
-             recorded in our experiments.
 
