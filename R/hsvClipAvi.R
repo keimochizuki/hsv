@@ -1,17 +1,28 @@
-#' Extractor of clipped vedio from an avi file 
+#' Extractor of clipped vedios from avi files
 #'
-#' Extracts designated range of video and create a new avi file
-#' from designated input source avi.
+#' Extracts designated range of videos and create new avi files
+#' from designated input sources.
 #'
-#' This function clips designated range in the input avi
-#' into a new file, without performing any other video conversion.
+#' This function clips designated range in the input avi files,
+#' without performing any other video conversion.
 #' It can be used, for example, to cut off certain range of the
 #' video file to where your further analyses are applied.
+#'
 #' Since no conversion is performed (with `-c copy` option in `ffmpeg`),
 #' this function normally takes not so long.
+#' However, as a drawback of it, clipped videos may not strictly start
+#' from the first frame of the designated clipping range.
+#' This is due to the limitation of FFmpeg itself.
+#' The `copy` option mentioned above prevent any conversion
+#' of the input video stream.
+#' Therefore, clipping can be started from the nearest preceding keyframes
+#' in the original files.
+#' (Otherwise, video conversion would be necessary.)
+#' If the input files are raw (typically very huge) avi files
+#' with no video compression, this limitation does not matter
+#' since all frames behave as keyframes in such a case.
 #'
-#' @param infile A string. The name of the avi file you want to clip.
-#' @param outfile A string. The name of the output avi file.
+#' @param infiles Strings. The names of the avi files you want to clip.
 #' @param from An integer. The index of the frame (frame number)
 #'   in the input file from where the clipped video starts.
 #' @param to An integer. The index of the frame (frame number)
@@ -30,31 +41,32 @@
 
 hsvClipAvi <- function(
 
-	infile,
-	outfile = "output.avi",
+	infiles,
 	from,
 	to
 
 ) {
 
-info <- system(paste('ffprobe -hide_banner -v error -i "', infile,
-	'" -select_streams v:0 -show_entries stream=r_frame_rate,duration -of csv',
-	sep = ""),
-	intern = TRUE)
-info <- strsplit(info, ",")[[1]][-1]
-names(info) <- c("r_frame_rate", "duration")
+if (!all(grepl("\\.avi$", infiles, ignore.case = TRUE))) {
+	stop("Non-avi file(s) designated, stopping further processing.")
+}
+if (!all(file.exists(infiles))) {
+	stop("Non-existing file(s) designated, stopping further processing.")
+}
 
-framerate <- eval(parse(text = info["r_frame_rate"]))
-duration <- as.numeric(info["duration"])
+outfiles <- sub("\\.avi$", sprintf("_%d-%d.avi", from, to), infiles, ignore.case = TRUE)
 
-frame2time <- function(n) {
+frame2time <- function(n, framerate, duration) {
+	if (n < 0) {
+		n <- 0
+		warning("Negative frame index designated, clipping from the initial frame instead.")
+	}
+	if (n > duration) {
+		n <- duration
+		warning("Frame index exceeded the total length, clipping to the last frame instead.")
+	}
+
 	s <- n / framerate
-	if (s < 0) {
-		s <- 0
-	}
-	if (s > duration) {
-		s <- duration
-	}
 	ms <- round((s - floor(s)) * 1000)
 	s <- floor(s)
 
@@ -67,19 +79,25 @@ frame2time <- function(n) {
 	return(sprintf("%02d:%02d:%02d.%03d", h, m, s, ms))
 }
 
-cmd <- paste('ffmpeg -hide_banner -y -ss ', frame2time(from),
-	' -to ', frame2time(to + 1), ' -i "', infile,
-	'" -c copy "', outfile, '"', sep = "")
-cat(getwd(), " > ", cmd, "\n", sep = "")
-flush.console()
+for (i in seq(along = infiles)) {
+	info <- hsvGetAviHeader(infiles[i])
+	fr <- info$Rate / info$Scale
+	dr <- info$`Total Frames`
 
-rslt <- system(cmd)
-cat("\n")
-flush.console()
+	cmd <- paste('ffmpeg -hide_banner -y -ss ', frame2time(from, fr, dr),
+		' -to ', frame2time(to + 1, fr, dr), ' -i "', infiles[i],
+		'" -c copy "', outfiles[i], '"', sep = "")
+	cat(getwd(), " > ", cmd, "\n", sep = "")
+	flush.console()
 
-if (rslt != 0) {
-	stop(paste("error in exporting", outfile))
+	rslt <- system(cmd)
+	cat("\n")
+	flush.console()
+
+	if (rslt != 0) {
+		stop(paste("Failed to export", outfiles[i]))
+	}
 }
 
-invisible(outfile)
+invisible(outfiles)
 }
