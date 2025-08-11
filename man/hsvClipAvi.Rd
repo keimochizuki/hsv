@@ -2,35 +2,45 @@
 % Please edit documentation in R/hsvClipAvi.R
 \name{hsvClipAvi}
 \alias{hsvClipAvi}
-\title{Extractor of clipped vedio from an avi file}
+\title{Extractor of clipped vedios from avi files}
 \usage{
-hsvClipAvi(infile, outfile = "output.avi", from, to)
+hsvClipAvi(infiles, from, to)
 }
 \arguments{
-\item{infile}{A string. The name of the avi file you want to clip.}
+\item{infiles}{Strings. The names of the avi files you want to clip.}
 
-\item{outfile}{A string. The name of the output avi file.}
+\item{from}{An integer. The index of the frame (frame number)
+in the input file from where the clipped video starts.}
 
-\item{from}{An integer. The index of the frame in the input file
-from where the clipped video starts.}
-
-\item{to}{An integer. The index of the frame in the input file
-to where the video should be clipped.}
+\item{to}{An integer. The index of the frame (frame number)
+in the input file to where the video should be clipped.}
 }
 \value{
 A string. The names of the created avi file.
 }
 \description{
-Extracts designated range of video and create a new avi file
-from designated input source avi.
+Extracts designated range of videos and create new avi files
+from designated input sources.
 }
 \details{
-This function clips designated range in the input avi
-into a new file, without performing any other video conversion.
+This function clips designated range in the input avi files,
+without performing any other video conversion.
 It can be used, for example, to cut off certain range of the
 video file to where your further analyses are applied.
+
 Since no conversion is performed (with \verb{-c copy} option in \code{ffmpeg}),
 this function normally takes not so long.
+However, as a drawback of it, clipped videos may not strictly start
+from the first frame of the designated clipping range.
+This is due to the limitation of FFmpeg itself.
+The \code{copy} option mentioned above prevent any conversion
+of the input video stream.
+Therefore, clipping can be started from the nearest preceding keyframes
+in the original files.
+(Otherwise, video conversion would be necessary.)
+If the input files are raw (typically very huge) avi files
+with no video compression, this limitation does not matter
+since all frames behave as keyframes in such a case.
 }
 \examples{
 \dontrun{

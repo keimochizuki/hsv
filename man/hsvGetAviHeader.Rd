@@ -7,7 +7,8 @@
 hsvGetAviHeader(infile, verbose = FALSE)
 }
 \arguments{
-\item{infile}{A string. The name of the avi file you want to clip.}
+\item{infile}{A string. The name of the avi file you want to
+read header information.}
 
 \item{verbose}{A logical. Whether to print the extracted values
 on the console lines.}
@@ -25,12 +26,12 @@ format, followed by the actual video data field.
 A lot of useful meta information can be obtained from avi header.
 In general, media player softwares utilizes this information
 to play the video.
-However, how the playback relies on the header information is
-highly variate among softwares.
-Also, these softwares normally present post-molded information
-as video properties, instead of the raw binary values.
+However, how actual playback relies on the header information is
+highly variate among video player softwares.
+Also, such softwares normally show \emph{post-molded} video properties
+to users, instead of the raw binary values.
 Therefore, I wrote a naive extractor of header information
-for video format confirmation.
+which would be useful in confirming video format and properties.
 }
 \examples{
 \dontrun{
