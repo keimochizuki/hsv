@@ -15,7 +15,8 @@
 #' Therefore, I wrote a naive extractor of header information
 #' which would be useful in confirming video format and properties.
 #'
-#' @param infile A string. The name of the avi file you want to clip.
+#' @param infile A string. The name of the avi file you want to
+#'   read header information.
 #' @param verbose A logical. Whether to print the extracted values
 #'   on the console lines.
 #'
@@ -36,6 +37,13 @@ hsvGetAviHeader <- function(
 	verbose = FALSE
 
 ) {
+
+if (!grepl("\\.avi$", infile, ignore.case = TRUE)) {
+	stop("Non-avi file designated, stopping further processing.")
+}
+if (!file.exists(infile)) {
+	stop("Non-existing file designated, stopping further processing.")
+}
 
 val <- matrix(c(
 	"RIFF ID",          "char", 4, NA,
