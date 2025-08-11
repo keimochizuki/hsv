@@ -12,10 +12,10 @@
 #'
 #' @param infile A string. The name of the avi file you want to clip.
 #' @param outfile A string. The name of the output avi file.
-#' @param from An integer. The index of the frame in the input file
-#'   from where the clipped video starts.
-#' @param to An integer. The index of the frame in the input file
-#'   to where the video should be clipped.
+#' @param from An integer. The index of the frame (frame number)
+#'   in the input file from where the clipped video starts.
+#' @param to An integer. The index of the frame (frame number)
+#'   in the input file to where the video should be clipped.
 #'
 #' @return A string. The names of the created avi file.
 #'

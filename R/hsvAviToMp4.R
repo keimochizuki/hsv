@@ -44,12 +44,19 @@ hsvAviToMp4 <- function(
 
 ) {
 
-outfiles <- sub("avi$", "mp4", infiles)
+if (!all(grepl("\\.avi$", infiles, ignore.case = TRUE))) {
+	stop("Non-avi file(s) designated, stopping further processing.")
+}
+if (!all(file.exists(infiles))) {
+	stop("Non-existing file(s) designated, stopping further processing.")
+}
+
+outfiles <- sub("\\.avi$", "\\.mp4", infiles, ignore.case = TRUE)
 
 for (i in seq(along = infiles)) {
 	rslt <- system(paste('ffmpeg -hide_banner -y -i ',
 		infiles[i], ' ', outfiles[i], sep = ""))
-	cat("\n\n")
+	cat("\n")
 	flush.console()
 }
 
