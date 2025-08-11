@@ -132,11 +132,17 @@ hsvChangeFrameRate <- function(
 
 ) {
 
+if (!all(grepl("\\.avi$", infiles, ignore.case = TRUE))) {
+	stop("Non-avi file(s) designated, stopping further processing.")
+}
+if (!all(file.exists(infiles))) {
+	stop("Non-existing file(s) designated, stopping further processing.")
+}
+
 if (!is.null(rate)) {
 	rate <- packBits(intToBits(round(rate)), "integer")
 }
 scale <- packBits(intToBits(round(scale)), "integer")
-
 if (!is.null(usperframe)) {
 	usperframe <- packBits(intToBits(round(usperframe)), "integer")
 }
