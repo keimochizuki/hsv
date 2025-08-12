@@ -222,6 +222,7 @@ Help for each function is also available with `?` operator.
 ```
 
 
+
 ## Tips for reading FFmpeg output
 
 When you call FFmpeg (either directly on the commandline or through hsv package),
@@ -379,6 +380,115 @@ frame=  433 fps=0.0 q=-1.0 Lsize=    1793KiB time=00:00:14.22 bitrate=1032.8kbit
 [libx264 @ 000001f0bfceccc0] ref B L1: 79.6% 20.4%
 [libx264 @ 000001f0bfceccc0] kb/s:1018.92
 ```
+
+
+
+---
+## Example Usage
+
+After some while since I first created hsv package,
+I gradually came to realize that practical utilization
+of this package is still demanding for R novices.
+Therefore, I decided to arrange a simple example usage
+of hsv package.
+Quickly going through these examples will get you to
+the very railhead of your career in video-based analyses
+using R and FFmpeg.
+
+
+### Time clipping of a video
+
+The most basic use of hsv package will be temporally
+clipping an avi file, which was the initial motive
+of creating this package.
+Time clipping can be simply done by passing
+the name of the video file to `hsvClipAvi()` function.
+The clipping range should be provided to `from` and `to` arguments
+by the indices of video frames (frame number).
+For examle, you can clip the video file `video.avi`
+from 500th to 1000th frame as below.
+
+```r
+hsvClipAvi("video.avi", from = 500, to = 1000)
+```
+
+The clipped file will be saved to the current working
+directory by default.
+
+
+### Clipping two videos with identical clipping range
+
+Next, consider the case when you have two or more avi files
+you want to clip with the same clipping range
+(i.e., from the same starting frame number to
+the same final frame number).
+For example, imagine you have multiple video files that were
+simultaneously recorded with a good (say, frame-perfect) synchrony.
+When clipping these videos, you will want to use exactly
+the same clipping range so that not to violate their synchrony.
+This can be done by passing the names of all such videos
+at once to `hsvClipAvi()` function, instead of calling it
+multiple times.
+
+```r
+hsvClipAvi(c("video1.avi", "video2.avi"), 500, 1000)
+```
+
+This will prevent accidental clipping error
+among a set of multiple video sources.
+
+
+### Horizontal stacking of two videos
+
+In a similar situation, you may want to stack
+multiple video streams, so that you can simultaneously
+watch a set of related videos at a glance.
+This can be achieved by `hsvStackAvi()` function as follows.
+
+```r
+hsvStackAvi(c("video1.avi", "video2.avi"))
+```
+
+By switching the `horizontal` argument,
+you can perform either horizontal (by default) or
+vertical stacking.
+
+
+### Combination of clipping and stacking
+
+By combining the two examples above,
+you can cut out required range of videos from multiple sources,
+and then stack them into one "overview" video file.
+
+```r
+tmp <- hsvClipAvi(c("video1.avi", "video2.avi"), 500, 1000)
+hsvStackAvi(tmp, keepfiles = FALSE)
+```
+The names of exported video files are inbisibly returned
+by these function.
+Thus you can sequentially use these functions without
+taking care of the names of temporary files.
+Also, in this example, `hsvStackAvi()` function removes
+the input files after the conversion is done
+(because of the negated `keepfiles` argument).
+This behavior may be beneficial in some occasion
+since it will prevent you from being bothered
+by tons of temporary video files on your disc.
+
+
+### Further information
+
+For further understanding, I strongly recommend to read through
+this README and check online helps for hsv package and
+its functions to begin with.
+**Please take advantage of such documentation**,
+before complaining about your inexperience in R language
+or unfamiliarity to FFmpeg software.
+The documentation exists there to help you.
+That's why I have paid considerable effort to
+prepare documentation, which I, as an author,
+personally do not need.
+
 
 
 ---
