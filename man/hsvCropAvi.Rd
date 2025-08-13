@@ -29,9 +29,8 @@ from original videos.}
 
 \item{yoffset}{An integer. The number of pixels skipped
 toward y-axis before cropping region starts.
-Note, as a tradition of image processing,
-the origin of an image is normally \emph{top}-left corner.
-Therefore, this value equals to the top (instead of bottom)
+Since the y-axis starts from the upper end in image processing,
+this value equals to the top (instead of bottom)
 margin omitted from original videos.}
 
 \item{suffix}{A string. The suffix to the file names
@@ -48,32 +47,35 @@ you want to save the output file(s)}
 A string. The names of the created avi file.
 }
 \description{
-Extracts designated range of videos and create new avi files
-from designated input sources.
+\code{hsvCropAvi()} extracts designated spatial region of videos
+and create new avi files from input sources.
 }
 \details{
-This function clips designated range in the input avi files,
+This function crops designated area in the input avi files.
 without performing any other video conversion.
-It can be used, for example, to cut off certain range of the
-video file to where your further analyses are applied.
+Such process is sometimes referred to as trimming,
+especially in image processing.
+However, the same word also means temporal clipping
+in the field of video editing.
+To avoid confusion, therefore, this process should be
+better referred to as "area cropping" or "spatial trimming".
+This functionality is used, for example,
+when the field of view of your video recording is too wider
+in relation to the targeted object.
 
-Since no conversion is performed (with \verb{-c copy} option in \code{ffmpeg}),
-this function normally takes not so long.
-However, as a drawback of it, clipped videos may not strictly start
-from the first frame of the designated clipping range.
-This is due to the limitation of FFmpeg itself.
-The \code{copy} option mentioned above prevent any conversion
-of the input video stream.
-Therefore, clipping can be started from the nearest preceding keyframes
-in the original files.
-(Otherwise, video conversion would be necessary.)
-If the input files are raw (typically very huge) avi files
-with no video compression, this limitation does not matter
-since all frames behave as keyframes in such a case.
+The area of the cropped region is determined by
+its width and height.
+Also, the location of the region can be modified by
+x (horizontal) and y (vertical) offsets.
+Here caution should be exercised that,
+as a tradition of image processing,
+the origin of an image normally exists at the \emph{top}-left corner.
+Therefore, the \code{yoffset} parameter determines
+the \emph{top} margin (instead of bottom) to the cropped region.
 }
 \examples{
 \dontrun{
-hsvClipAvi("input.avi", from = 1000, to = 1999)
+hsvCropAvi("input.avi", 480, 360)
 }
 
 }

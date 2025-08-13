@@ -476,7 +476,7 @@ because of the negated `keepinfiles` argument.
 This behavior may be beneficial in some occasion
 by preventing you from being messed up
 with tons of temporary files created on your disc.
-Although `hsvClipAvi()` function (at the first line)
+`hsvClipAvi()` function (at the first line)
 also has the same option,
 but it is not used in this example.
 No one wants to remove original input files, for sure.

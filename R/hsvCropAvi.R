@@ -1,26 +1,29 @@
 #' Crop a region of video area
 #'
-#' Extracts designated range of videos and create new avi files
-#' from designated input sources.
+#' `hsvCropAvi()` extracts designated spatial region of videos
+#' and create new avi files from input sources.
 #'
-#' This function clips designated range in the input avi files,
+#' This function crops designated area in the input avi files.
 #' without performing any other video conversion.
-#' It can be used, for example, to cut off certain range of the
-#' video file to where your further analyses are applied.
+#' Such process is sometimes referred to as trimming,
+#' especially in image processing.
+#' However, the same word also means temporal clipping
+#' in the field of video editing.
+#' To avoid confusion, therefore, this process should be
+#' better referred to as "area cropping" or "spatial trimming".
+#' This functionality is used, for example,
+#' when the field of view of your video recording is too wider
+#' in relation to the targeted object.
 #'
-#' Since no conversion is performed (with `-c copy` option in `ffmpeg`),
-#' this function normally takes not so long.
-#' However, as a drawback of it, clipped videos may not strictly start
-#' from the first frame of the designated clipping range.
-#' This is due to the limitation of FFmpeg itself.
-#' The `copy` option mentioned above prevent any conversion
-#' of the input video stream.
-#' Therefore, clipping can be started from the nearest preceding keyframes
-#' in the original files.
-#' (Otherwise, video conversion would be necessary.)
-#' If the input files are raw (typically very huge) avi files
-#' with no video compression, this limitation does not matter
-#' since all frames behave as keyframes in such a case.
+#' The area of the cropped region is determined by
+#' its width and height.
+#' Also, the location of the region can be modified by
+#' x (horizontal) and y (vertical) offsets.
+#' Here caution should be exercised that,
+#' as a tradition of image processing,
+#' the origin of an image normally exists at the *top*-left corner.
+#' Therefore, the `yoffset` parameter determines
+#' the *top* margin (instead of bottom) to the cropped region.
 #'
 #' @param infiles Strings. The names of the avi files you want to crop.
 #' @param w An integer. The width of the cropping region in pixels.
@@ -31,9 +34,8 @@
 #'   from original videos.
 #' @param yoffset An integer. The number of pixels skipped
 #'   toward y-axis before cropping region starts.
-#'   Note, as a tradition of image processing,
-#'   the origin of an image is normally *top*-left corner.
-#'   Therefore, this value equals to the top (instead of bottom)
+#'   Since the y-axis starts from the upper end in image processing,
+#'   this value equals to the top (instead of bottom)
 #'   margin omitted from original videos.
 #' @param suffix A string. The suffix to the file names
 #'   concatenated to the names of input avi files
@@ -47,7 +49,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' hsvClipAvi("input.avi", from = 1000, to = 1999)
+#' hsvCropAvi("input.avi", 480, 360)
 #' }
 #'
 #' @keywords utilities

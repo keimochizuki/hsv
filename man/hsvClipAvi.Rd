@@ -37,22 +37,18 @@ A string. The names of the created avi file.
 }
 \description{
 \code{hsvClipAvi()} extracts designated time range of videos
-and create new avi files
-from designated video sources.
+and create new avi files from input sources.
 }
 \details{
 This function clips designated range in the input avi files,
 without performing any other video conversion.
-Such video clipping is often referred to in many different ways
+Such video clipping is referred to in many different wordings
 like cutting, splitting, splicing, and trimming.
-In certain occasions, all these words can be used
-as practically the same meaning.
-But in other situation, each can have different meaning.
+In certain occasions, all these words can be used interchangeably.
+But in other situation, each one can express different meaning.
 To avoid confusion with cropping in spatial domain,
-this process may be better referred to as "temporal trimming".
-
-No matter how it is called, anyway, \code{hsvClipAvi()} extracts
-a limited time range from video files.
+this process may be better referred to as "time clipping" or
+"temporal trimming".
 It can be used, for example, to cut off certain range of
 the video data to which you want to perform further analyses.
 
