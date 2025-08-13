@@ -1,11 +1,12 @@
-#' Converter of avi video into mp4 format
+#' Convert of avi video into mp4 format
 #'
-#' Converts designated avi video file into mp4 format
-#' that can be played in various environment.
+#' `hsvAviToMp4()` converts designated avi video file
+#' into mp4 format that can be played in various environment.
 #'
-#' Avi video format has really diverse major and minor subtypes
+#' Avi video format has diverse major and minor subtypes
 #' in its specification.
-#' Times and times, you will meet a condition that some files
+#' Based on its technical complexity,
+#' you will often meet a situation that some files
 #' can be opened and played with a certain software,
 #' but some others are not.
 #' This can be due to their video codec, pixel resolution,
@@ -15,7 +16,7 @@
 #' Such problems can be sometimes overcome by converting
 #' these files into mp4 format.
 #' To the author's knowledge and experience, mp4 format is
-#' more likely to be played in wider condition.
+#' more likely to be played in wider circumstance.
 #' (Still, it shares the same problems with avi format
 #' for some extent.)
 #' Therefore, this package provides an easy way to perform
@@ -23,8 +24,10 @@
 #'
 #' @param infiles Strings. The names of the avi files
 #'   you want to convert into mp4.
-#' @param keepfiles A logical. Whether to keep the input files
+#' @param keepinfiles A logical. Whether to keep the input files
 #'   after the conversion.
+#' @param savedir A string. The path to the directory
+#'   you want to save the output file(s)
 #'
 #' @return Strings. The names of the created mp4 files.
 #'
@@ -40,27 +43,22 @@
 hsvAviToMp4 <- function(
 
 	infiles,
-	keepfiles = TRUE
+	keepinfiles = TRUE,
+	savedir = "."
 
 ) {
 
-if (!all(grepl("\\.avi$", infiles, ignore.case = TRUE))) {
-	stop("Non-avi file(s) designated, stopping further processing.")
-}
-if (!all(file.exists(infiles))) {
-	stop("Non-existing file(s) designated, stopping further processing.")
-}
+checkinfiles(infiles)
+savedir <- checksavedir(savedir)
 
-outfiles <- sub("\\.avi$", "\\.mp4", infiles, ignore.case = TRUE)
+outfiles <- sub("\\.avi$", "\\.mp4", basename(infiles), ignore.case = TRUE)
+outfiles <- file.path(savedir, outfiles)
 
 for (i in seq(along = infiles)) {
-	rslt <- system(paste('ffmpeg -hide_banner -y -i ',
-		infiles[i], ' ', outfiles[i], sep = ""))
-	cat("\n")
-	flush.console()
+	callffmpeg(paste('-i "', infiles[i], '" "', outfiles[i], '"', sep = ""))
 }
 
-if (!keepfiles) {
+if (!keepinfiles) {
 	file.remove(infiles)
 }
 

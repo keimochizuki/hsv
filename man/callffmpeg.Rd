@@ -2,7 +2,7 @@
 % Please edit documentation in R/callffmpeg.R
 \name{callffmpeg}
 \alias{callffmpeg}
-\title{Call FFmpeg with provided command}
+\title{Call FFmpeg with a given command}
 \usage{
 callffmpeg(cmd)
 }
@@ -14,6 +14,6 @@ callffmpeg(cmd)
 using \code{system()}.
 It also generates some console outputs,
 asking the users to wait for a second,
-or telling them about the error during \code{system()} call.
+or telling them about errors during \code{system()} call.
 }
 \keyword{utilities}

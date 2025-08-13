@@ -2,28 +2,32 @@
 % Please edit documentation in R/hsvAviToMp4.R
 \name{hsvAviToMp4}
 \alias{hsvAviToMp4}
-\title{Converter of avi video into mp4 format}
+\title{Convert of avi video into mp4 format}
 \usage{
-hsvAviToMp4(infiles, keepfiles = TRUE)
+hsvAviToMp4(infiles, keepinfiles = TRUE, savedir = ".")
 }
 \arguments{
 \item{infiles}{Strings. The names of the avi files
 you want to convert into mp4.}
 
-\item{keepfiles}{A logical. Whether to keep the input files
+\item{keepinfiles}{A logical. Whether to keep the input files
 after the conversion.}
+
+\item{savedir}{A string. The path to the directory
+you want to save the output file(s)}
 }
 \value{
 Strings. The names of the created mp4 files.
 }
 \description{
-Converts designated avi video file into mp4 format
-that can be played in various environment.
+\code{hsvAviToMp4()} converts designated avi video file
+into mp4 format that can be played in various environment.
 }
 \details{
-Avi video format has really diverse major and minor subtypes
+Avi video format has diverse major and minor subtypes
 in its specification.
-Times and times, you will meet a condition that some files
+Based on its technical complexity,
+you will often meet a situation that some files
 can be opened and played with a certain software,
 but some others are not.
 This can be due to their video codec, pixel resolution,
@@ -33,7 +37,7 @@ or meta data fields.
 Such problems can be sometimes overcome by converting
 these files into mp4 format.
 To the author's knowledge and experience, mp4 format is
-more likely to be played in wider condition.
+more likely to be played in wider circumstance.
 (Still, it shares the same problems with avi format
 for some extent.)
 Therefore, this package provides an easy way to perform

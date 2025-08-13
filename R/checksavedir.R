@@ -2,7 +2,7 @@
 #'
 #' `checksavedir()` checks for the existence of a directory
 #' where output files from hsv functions are saved.
-#' If not, it creates a new directory.
+#' If such a directory does not exist, new one is created.
 #'
 #' @param d A string. The name of the directory.
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hsvCheckFFmpeg.R
 \name{hsvCheckFFmpeg}
 \alias{hsvCheckFFmpeg}
-\title{Checker of FFmpeg availability}
+\title{Check FFmpeg availability}
 \usage{
 hsvCheckFFmpeg(verbose = FALSE)
 }
@@ -18,7 +18,8 @@ emit an error and stop the operation when \code{ffmepg} is
 not available (instead of returning \code{FALSE}).
 }
 \description{
-Checks whether \code{ffmpeg} command is available on the system.
+\code{hsvCheckFFmpeg()} checks whether \code{ffmpeg} command is
+available on the system.
 }
 \details{
 Since video editing of hsv package is actually performed
@@ -28,9 +29,14 @@ but also modify environment variables appropriately,
 so that \code{ffmpeg} command can be correctly called
 on the system's console.
 This function checks the availability of \code{ffmpeg} command
-by calling version information for it.
+by trying to ask version information to it.
+
 If \code{ffmpeg} is not available, this function emits an error,
 halting any subsequent operations.
+Please check your system again to confirm FFmpeg installation.
+If you have any difficuties in installation process,
+refer to the README.md page of hsv package
+available on the GitHub repository of the author.
 }
 \examples{
 hsvCheckFFmpeg()

@@ -1,15 +1,15 @@
-#' Checker of avi header information
+#' Read out avi header
 #'
-#' Extracts header information of the first video stream
-#' in an avi file.
+#' `hsvGetAviHeader()` extracts header information of
+#' the first video stream in an avi file.
 #'
 #' An avi file starts with a header data with a predetermined
 #' format, followed by the actual video data field.
 #' A lot of useful meta information can be obtained from avi header.
 #' In general, media player softwares utilizes this information
 #' to play the video.
-#' However, how actual playback relies on the header information is
-#' highly variate among video player softwares.
+#' However, how actual playback is done in accordance with
+#' the header information is highly variate among video player softwares.
 #' Also, such softwares normally show *post-molded* video properties
 #' to users, instead of the raw binary values.
 #' Therefore, I wrote a naive extractor of header information
@@ -38,12 +38,7 @@ hsvGetAviHeader <- function(
 
 ) {
 
-if (!grepl("\\.avi$", infile, ignore.case = TRUE)) {
-	stop("Non-avi file designated, stopping further processing")
-}
-if (!file.exists(infile)) {
-	stop("Non-existing file designated, stopping further processing")
-}
+checkinfiles(infile)
 
 val <- matrix(c(
 	"RIFF ID",          "char", 4, NA,

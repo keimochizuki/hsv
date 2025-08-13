@@ -1,7 +1,7 @@
 #' Check existence and compatibility of video files
 #'
 #' `checkinfiles()` performs routine checks of input
-#' video files to many functions in hsv package.
+#' video files for many hsv functions.
 #' These include confirmation of existence of the files,
 #' as well as checking their file extentions.
 #'

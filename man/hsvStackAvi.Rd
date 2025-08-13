@@ -2,33 +2,22 @@
 % Please edit documentation in R/hsvStackAvi.R
 \name{hsvStackAvi}
 \alias{hsvStackAvi}
-\title{Synthesizer of juxtaposed vedio from multiple avi files}
+\title{Concatenate multiple videos horizontally/vertically}
 \usage{
 hsvStackAvi(
   infiles,
-  outfile = "output.avi",
-  keepfiles = TRUE,
-  crf = 20,
   horizontal = TRUE,
   addfilt = "",
-  framerate = 50
+  crf = 20,
+  framerate = 50,
+  outfile = "",
+  suffix = "stacked",
+  keepinfiles = TRUE,
+  savedir = "."
 )
 }
 \arguments{
 \item{infiles}{Strings. The names of the avi files you want to merge.}
-
-\item{outfile}{A string. The name of the output avi file.}
-
-\item{keepfiles}{A logical. Whether to keep the input files
-after the stacking.}
-
-\item{crf}{An integer. The constant rate factor (crf),
-i.e., a value to determine the quality of the converted video
-in FFmpeg (ranging from 0 to 51).
-Smaller value indicate high quality video.
-The default value for \code{ffmpeg} command is 23,
-meaning that the default for this function is quality-oriented,
-in exchange for larger file size.}
 
 \item{horizontal}{A logical. Whether to stack the videos horizontally.
 If set FALSE, videos are vertically stacked.}
@@ -36,14 +25,41 @@ If set FALSE, videos are vertically stacked.}
 \item{addfilt}{A string. Additional filter setting passed to
 \code{-filter_complex} option of \code{ffmpeg}.}
 
+\item{crf}{An integer. The constant rate factor (crf),
+i.e., a value to determine the quality of the converted video
+in FFmpeg (ranging from 0 to 51).
+Smaller value indicate high quality video.
+The default value for original \code{ffmpeg} command is 23.
+Therefore, the default for this function is quality-oriented,
+in exchange for possible larger file size.}
+
 \item{framerate}{An integer. The frame rate of the output avi file.}
+
+\item{outfile}{A string. The name of the output avi file.
+If provided, this parameter override \code{suffix} argument
+that is normally used to create output file names
+in many other hsv functions.}
+
+\item{suffix}{A string. The suffix to the file names
+concatenated to the names of input avi files
+to make those for the outputs.
+Since this function creates one output from multiple inputs
+(unlike other hsv functions),
+only the name of the first input file is inherited
+with the designated suffix.}
+
+\item{keepinfiles}{A logical. Whether to keep the input files
+after the stacking.}
+
+\item{savedir}{A string. The path to the directory
+you want to save the output file(s)}
 }
 \value{
-A string. The names of the created avi file.
+A string. The name of the created avi file.
 }
 \description{
-Stacks input avi files horizontally or vertically to create
-a new, merged vedio with a juxtaposed view.
+\code{hsvStackAvi} stacks input avi files horizontally or vertically
+to create a new, merged vedio with a juxtaposed view.
 }
 \details{
 This function creates a stacked view from multiple input avi videos.

@@ -2,9 +2,16 @@
 % Please edit documentation in R/hsvClipAvi.R
 \name{hsvClipAvi}
 \alias{hsvClipAvi}
-\title{Extractor of clipped vedios from avi files}
+\title{Clip time range from avi files}
 \usage{
-hsvClipAvi(infiles, from, to)
+hsvClipAvi(
+  infiles,
+  from,
+  to,
+  suffix = paste(from, to, sep = "-"),
+  keepinfiles = TRUE,
+  savedir = "."
+)
 }
 \arguments{
 \item{infiles}{Strings. The names of the avi files you want to clip.}
@@ -14,19 +21,40 @@ in the input file from where the clipped video starts.}
 
 \item{to}{An integer. The index of the frame (frame number)
 in the input file to where the video should be clipped.}
+
+\item{suffix}{A string. The suffix to the file names
+concatenated to the names of input avi files
+to make those for the outputs.}
+
+\item{keepinfiles}{A logical. Whether to keep the input files
+after the conversion.}
+
+\item{savedir}{A string. The path to the directory
+you want to save the output file(s)}
 }
 \value{
 A string. The names of the created avi file.
 }
 \description{
-Extracts designated range of videos and create new avi files
-from designated input sources.
+\code{hsvClipAvi()} extracts designated time range of videos
+and create new avi files
+from designated video sources.
 }
 \details{
 This function clips designated range in the input avi files,
 without performing any other video conversion.
-It can be used, for example, to cut off certain range of the
-video file to where your further analyses are applied.
+Such video clipping is often referred to in many different ways
+like cutting, splitting, splicing, and trimming.
+In certain occasions, all these words can be used
+as practically the same meaning.
+But in other situation, each can have different meaning.
+To avoid confusion with cropping in spatial domain,
+this process may be better referred to as "temporal trimming".
+
+No matter how it is called, anyway, \code{hsvClipAvi()} extracts
+a limited time range from video files.
+It can be used, for example, to cut off certain range of
+the video data to which you want to perform further analyses.
 
 Since no conversion is performed (with \verb{-c copy} option in \code{ffmpeg}),
 this function normally takes not so long.
@@ -35,12 +63,12 @@ from the first frame of the designated clipping range.
 This is due to the limitation of FFmpeg itself.
 The \code{copy} option mentioned above prevent any conversion
 of the input video stream.
-Therefore, clipping can be started from the nearest preceding keyframes
-in the original files.
+Therefore, clipping can only be started from the nearest
+preceding keyframes in the original files.
 (Otherwise, video conversion would be necessary.)
 If the input files are raw (typically very huge) avi files
 with no video compression, this limitation does not matter
-since all frames behave as keyframes in such a case.
+since all the frames are technically keyframes in such a case.
 }
 \examples{
 \dontrun{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hsvGetAviHeader.R
 \name{hsvGetAviHeader}
 \alias{hsvGetAviHeader}
-\title{Checker of avi header information}
+\title{Read out avi header}
 \usage{
 hsvGetAviHeader(infile, verbose = FALSE)
 }
@@ -17,8 +17,8 @@ on the console lines.}
 A list. Extracted header information.
 }
 \description{
-Extracts header information of the first video stream
-in an avi file.
+\code{hsvGetAviHeader()} extracts header information of
+the first video stream in an avi file.
 }
 \details{
 An avi file starts with a header data with a predetermined
@@ -26,8 +26,8 @@ format, followed by the actual video data field.
 A lot of useful meta information can be obtained from avi header.
 In general, media player softwares utilizes this information
 to play the video.
-However, how actual playback relies on the header information is
-highly variate among video player softwares.
+However, how actual playback is done in accordance with
+the header information is highly variate among video player softwares.
 Also, such softwares normally show \emph{post-molded} video properties
 to users, instead of the raw binary values.
 Therefore, I wrote a naive extractor of header information

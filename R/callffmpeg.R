@@ -1,10 +1,10 @@
-#' Call FFmpeg with provided command
+#' Call FFmpeg with a given command
 #'
 #' `callffmpeg()` performs actual call for FFmpeg software
 #' using `system()`.
 #' It also generates some console outputs,
 #' asking the users to wait for a second,
-#' or telling them about the error during `system()` call.
+#' or telling them about errors during `system()` call.
 #'
 #' @param cmd A string. The command passed to FFmpeg.
 #'

@@ -1,6 +1,7 @@
-#' Checker of FFmpeg availability
+#' Check FFmpeg availability
 #'
-#' Checks whether `ffmpeg` command is available on the system.
+#' `hsvCheckFFmpeg()` checks whether `ffmpeg` command is
+#' available on the system.
 #'
 #' Since video editing of hsv package is actually performed
 #' by `ffmpeg.exe`, installation of FFmpeg is mandatory.
@@ -9,9 +10,14 @@
 #' so that `ffmpeg` command can be correctly called
 #' on the system's console.
 #' This function checks the availability of `ffmpeg` command
-#' by calling version information for it.
+#' by trying to ask version information to it.
+#'
 #' If `ffmpeg` is not available, this function emits an error,
 #' halting any subsequent operations.
+#' Please check your system again to confirm FFmpeg installation.
+#' If you have any difficuties in installation process,
+#' refer to the README.md page of hsv package
+#' available on the GitHub repository of the author.
 #'
 #' @param verbose A logical. Whether to print the standard output
 #'   strings on R.
@@ -37,7 +43,7 @@ hsvCheckFFmpeg <- function(
 
 rslt <- system("ffmpeg -version", ignore.stdout = !verbose)
 if (rslt != 0) {
-	stop(paste("ffmpeg call failed with an error code", rslt))
+	stop(paste("Failed to call ffmpeg with an error code", rslt))
 }
 
 return(TRUE)

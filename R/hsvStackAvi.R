@@ -1,7 +1,7 @@
-#' Synthesizer of juxtaposed vedio from multiple avi files 
+#' Concatenate multiple videos horizontally/vertically
 #'
-#' Stacks input avi files horizontally or vertically to create
-#' a new, merged vedio with a juxtaposed view.
+#' `hsvStackAvi` stacks input avi files horizontally or vertically
+#' to create a new, merged vedio with a juxtaposed view.
 #'
 #' This function creates a stacked view from multiple input avi videos.
 #' It is best used for the purpose to get a overview of the videos
@@ -13,23 +13,35 @@
 #' through optional arguments.
 #'
 #' @param infiles Strings. The names of the avi files you want to merge.
-#' @param outfile A string. The name of the output avi file.
-#' @param keepfiles A logical. Whether to keep the input files
-#'   after the stacking.
-#' @param crf An integer. The constant rate factor (crf),
-#'   i.e., a value to determine the quality of the converted video
-#'   in FFmpeg (ranging from 0 to 51).
-#'   Smaller value indicate high quality video.
-#'   The default value for `ffmpeg` command is 23,
-#'   meaning that the default for this function is quality-oriented,
-#'   in exchange for larger file size.
 #' @param horizontal A logical. Whether to stack the videos horizontally.
 #'   If set FALSE, videos are vertically stacked.
 #' @param addfilt A string. Additional filter setting passed to
 #'   `-filter_complex` option of `ffmpeg`.
+#' @param crf An integer. The constant rate factor (crf),
+#'   i.e., a value to determine the quality of the converted video
+#'   in FFmpeg (ranging from 0 to 51).
+#'   Smaller value indicate high quality video.
+#'   The default value for original `ffmpeg` command is 23.
+#'   Therefore, the default for this function is quality-oriented,
+#'   in exchange for possible larger file size.
 #' @param framerate An integer. The frame rate of the output avi file.
+#' @param outfile A string. The name of the output avi file.
+#'   If provided, this parameter override `suffix` argument
+#'   that is normally used to create output file names
+#'   in many other hsv functions.
+#' @param suffix A string. The suffix to the file names
+#'   concatenated to the names of input avi files
+#'   to make those for the outputs.
+#'   Since this function creates one output from multiple inputs
+#'   (unlike other hsv functions),
+#'   only the name of the first input file is inherited
+#'   with the designated suffix.
+#' @param keepinfiles A logical. Whether to keep the input files
+#'   after the stacking.
+#' @param savedir A string. The path to the directory
+#'   you want to save the output file(s)
 #'
-#' @return A string. The names of the created avi file.
+#' @return A string. The name of the created avi file.
 #'
 #' @examples
 #' \dontrun{
@@ -43,14 +55,27 @@
 hsvStackAvi <- function(
 
 	infiles,
-	outfile = "output.avi",
-	keepfiles = TRUE,
-	crf = 20,
 	horizontal = TRUE,
 	addfilt = "",
-	framerate = 50
+	crf = 20,
+	framerate = 50,
+	outfile = "",
+	suffix = "stacked",
+	keepinfiles = TRUE,
+	savedir = "."
 
 ) {
+
+checkinfiles(infiles)
+savedir <- checksavedir(savedir)
+
+if (outfile != "") {
+	outfile <- sub("\\.avi$", "", basename(outfile), ignore.case = TRUE)
+	outfile <- paste(outfile, ".avi", sep = "")
+} else {
+	outfile <- sub("\\.avi$", sprintf("_%s.avi", suffix), basename(infiles[1]), ignore.case = TRUE)
+}
+outfile <- file.path(savedir, outfile)
 
 filter <- ifelse(horizontal, 'hstack', 'vstack')
 if (length(infiles) > 2) {
@@ -62,29 +87,19 @@ if (addfilt != "") {
 }
 
 if (length(infiles) < 2) {
-	warning("stop stacking for non-multiple infiles")
+	warning("Only a single input file designated, skipping further processing")
 } else {
-	cmd <- paste('ffmpeg -hide_banner -y ',
+	cmd <- paste(
 		paste(paste('-i "', infiles, '"', sep = ''), collapse = ' '),
 		' -codec:v libx264 -pix_fmt yuv420p -crf ', crf,
 		' -filter_complex "', filter, '"',
 		ifelse(length(infiles) > 2, ' -map "[v]"', ''),
 		' "', outfile, '"', sep = "")
-	cat(getwd(), " > ", cmd, "\n", sep = "")
-	flush.console()
-
-	rslt <- system(cmd)
-	cat("\n")
-	flush.console()
-
-	if (rslt != 0) {
-		stop(paste("error in creating horizontal stack", outfile))
-	}
-
+	callffmpeg(cmd)
 	hsvChangeFrameRate(outfile, rate = framerate)
 }
 
-if (!keepfiles) {
+if (!keepinfiles) {
 	file.remove(infiles)
 }
 
