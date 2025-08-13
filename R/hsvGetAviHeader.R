@@ -39,10 +39,10 @@ hsvGetAviHeader <- function(
 ) {
 
 if (!grepl("\\.avi$", infile, ignore.case = TRUE)) {
-	stop("Non-avi file designated, stopping further processing.")
+	stop("Non-avi file designated, stopping further processing")
 }
 if (!file.exists(infile)) {
-	stop("Non-existing file designated, stopping further processing.")
+	stop("Non-existing file designated, stopping further processing")
 }
 
 val <- matrix(c(

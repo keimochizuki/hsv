@@ -384,7 +384,7 @@ frame=  433 fps=0.0 q=-1.0 Lsize=    1793KiB time=00:00:14.22 bitrate=1032.8kbit
 
 
 ---
-## Example Usage
+## Example usage
 
 After some while since I first created hsv package,
 I gradually came to realize that practical utilization
@@ -405,11 +405,11 @@ Time clipping can be simply done by passing
 the name of the video file to `hsvClipAvi()` function.
 The clipping range should be provided to `from` and `to` arguments
 by the indices of video frames (frame number).
-For examle, you can clip the video file `video.avi`
+For examle, you can clip the video file `input.avi`
 from 500th to 1000th frame as below.
 
 ```r
-hsvClipAvi("video.avi", from = 500, to = 1000)
+hsvClipAvi("input.avi", from = 500, to = 1000)
 ```
 
 The clipped file will be saved to the current working
@@ -431,11 +431,12 @@ at once to `hsvClipAvi()` function, instead of calling it
 multiple times.
 
 ```r
-hsvClipAvi(c("video1.avi", "video2.avi"), 500, 1000)
+hsvClipAvi(c("input1.avi", "input2.avi"), 500, 1000)
 ```
 
-This will prevent accidental clipping error
-among a set of multiple video sources.
+This will prevent accidental clipping mistakes
+among a set of multiple video sources,
+using different clipping ranges.
 
 
 ### Horizontal stacking of two videos
@@ -446,7 +447,7 @@ watch a set of related videos at a glance.
 This can be achieved by `hsvStackAvi()` function as follows.
 
 ```r
-hsvStackAvi(c("video1.avi", "video2.avi"))
+hsvStackAvi(c("input1.avi", "input2.avi"))
 ```
 
 By switching the `horizontal` argument,
@@ -461,33 +462,40 @@ you can cut out required range of videos from multiple sources,
 and then stack them into one "overview" video file.
 
 ```r
-tmp <- hsvClipAvi(c("video1.avi", "video2.avi"), 500, 1000)
-hsvStackAvi(tmp, keepfiles = FALSE)
+tmp <- hsvClipAvi(c("input1.avi", "input2.avi"), 500, 1000)
+hsvStackAvi(tmp, keepinfiles = FALSE)
 ```
+
 The names of exported video files are inbisibly returned
 by these function.
 Thus you can sequentially use these functions without
 taking care of the names of temporary files.
-Also, in this example, `hsvStackAvi()` function removes
-the input files after the conversion is done
-(because of the negated `keepfiles` argument).
+Also, in this example, the second `hsvStackAvi()` function removes
+the input files after the conversion is done,
+because of the negated `keepinfiles` argument.
 This behavior may be beneficial in some occasion
-since it will prevent you from being bothered
-by tons of temporary video files on your disc.
+by preventing you from being messed up
+with tons of temporary files created on your disc.
+Although `hsvClipAvi()` function (at the first line)
+also has the same option,
+but it is not used in this example.
+No one wants to remove original input files, for sure.
 
 
-### Further information
+### Further expertise
 
 For further understanding, I strongly recommend to read through
-this README and check online helps for hsv package and
-its functions to begin with.
-**Please take advantage of such documentation**,
+this README and check online helps of hsv package
+to begin with.
+**Take advantage of the already-existing documentation**,
 before complaining about your inexperience in R language
 or unfamiliarity to FFmpeg software.
 The documentation exists there to help you.
-That's why I have paid considerable effort to
-prepare documentation, which I, as an author,
-personally do not need.
+That's why I have spent considerable time to
+prepare documentation, which I myself personally
+do not need as the author.
+Please do not try to make a fool of the effort
+I paid to help you.
 
 
 

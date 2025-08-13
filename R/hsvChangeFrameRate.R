@@ -133,10 +133,10 @@ hsvChangeFrameRate <- function(
 ) {
 
 if (!all(grepl("\\.avi$", infiles, ignore.case = TRUE))) {
-	stop("Non-avi file(s) designated, stopping further processing.")
+	stop("Non-avi file(s) designated, stopping further processing")
 }
 if (!all(file.exists(infiles))) {
-	stop("Non-existing file(s) designated, stopping further processing.")
+	stop("Non-existing file(s) designated, stopping further processing")
 }
 
 if (!is.null(rate)) {

@@ -1,3 +1,3 @@
-#' This is test description in hsv-package.R file.
+#' The R hsv package
 #'
 "_PACKAGE"
