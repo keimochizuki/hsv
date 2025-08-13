@@ -21,4 +21,5 @@ based on the designated frame rate.
 If the index exceeds the existing frame,
 it returns the initial or final frame index instead.
 }
+\keyword{internal}
 \keyword{utilities}

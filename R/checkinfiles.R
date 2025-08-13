@@ -1,4 +1,4 @@
-#' Check existence and compatibility of video files
+#' Check compatibility of source videos
 #'
 #' `checkinfiles()` performs routine checks of input
 #' video files for many hsv functions.
@@ -7,7 +7,7 @@
 #'
 #' @param f Strings. The names of the video files.
 #'
-#' @keywords utilities
+#' @keywords utilities internal
 
 checkinfiles <- function(
 

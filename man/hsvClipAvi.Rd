@@ -2,7 +2,7 @@
 % Please edit documentation in R/hsvClipAvi.R
 \name{hsvClipAvi}
 \alias{hsvClipAvi}
-\title{Clip time range from avi files}
+\title{Clip a portion of video range}
 \usage{
 hsvClipAvi(
   infiles,

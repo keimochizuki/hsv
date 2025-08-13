@@ -2,7 +2,7 @@
 % Please edit documentation in R/hsvStackAvi.R
 \name{hsvStackAvi}
 \alias{hsvStackAvi}
-\title{Concatenate multiple videos horizontally/vertically}
+\title{Juxtapose multiple videos}
 \usage{
 hsvStackAvi(
   infiles,
@@ -58,7 +58,7 @@ you want to save the output file(s)}
 A string. The name of the created avi file.
 }
 \description{
-\code{hsvStackAvi} stacks input avi files horizontally or vertically
+\code{hsvStackAvi} concatenates input avi files horizontally or vertically
 to create a new, merged vedio with a juxtaposed view.
 }
 \details{

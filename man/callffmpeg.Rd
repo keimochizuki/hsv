@@ -16,4 +16,5 @@ It also generates some console outputs,
 asking the users to wait for a second,
 or telling them about errors during \code{system()} call.
 }
+\keyword{internal}
 \keyword{utilities}

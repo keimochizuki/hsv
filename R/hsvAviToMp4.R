@@ -1,4 +1,4 @@
-#' Convert of avi video into mp4 format
+#' Convert avi video into mp4 format
 #'
 #' `hsvAviToMp4()` converts designated avi video file
 #' into mp4 format that can be played in various environment.

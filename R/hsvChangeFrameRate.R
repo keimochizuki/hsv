@@ -1,4 +1,4 @@
-#' Overwrite frame rate information in avi header
+#' Overwrite frame rate in avi header
 #'
 #' `hsvChangeFrameRate()` changes frame rate (and optionally
 #' real-time frame length) information engraved

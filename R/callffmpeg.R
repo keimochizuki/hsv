@@ -8,7 +8,7 @@
 #'
 #' @param cmd A string. The command passed to FFmpeg.
 #'
-#' @keywords utilities
+#' @keywords utilities internal
 
 callffmpeg <- function(
 

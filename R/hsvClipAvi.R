@@ -1,4 +1,4 @@
-#' Clip time range from avi files
+#' Clip a portion of video range
 #'
 #' `hsvClipAvi()` extracts designated time range of videos
 #' and create new avi files

@@ -2,7 +2,7 @@
 % Please edit documentation in R/checksavedir.R
 \name{checksavedir}
 \alias{checksavedir}
-\title{Check (and create if necessary) designated directory}
+\title{Check output directory}
 \usage{
 checksavedir(d)
 }
@@ -14,4 +14,5 @@ checksavedir(d)
 where output files from hsv functions are saved.
 If such a directory does not exist, new one is created.
 }
+\keyword{internal}
 \keyword{utilities}

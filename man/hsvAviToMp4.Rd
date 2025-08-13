@@ -2,7 +2,7 @@
 % Please edit documentation in R/hsvAviToMp4.R
 \name{hsvAviToMp4}
 \alias{hsvAviToMp4}
-\title{Convert of avi video into mp4 format}
+\title{Convert avi video into mp4 format}
 \usage{
 hsvAviToMp4(infiles, keepinfiles = TRUE, savedir = ".")
 }

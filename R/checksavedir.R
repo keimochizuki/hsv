@@ -1,4 +1,4 @@
-#' Check (and create if necessary) designated directory
+#' Check output directory
 #'
 #' `checksavedir()` checks for the existence of a directory
 #' where output files from hsv functions are saved.
@@ -6,7 +6,7 @@
 #'
 #' @param d A string. The name of the directory.
 #'
-#' @keywords utilities
+#' @keywords utilities internal
 
 checksavedir <- function(
 

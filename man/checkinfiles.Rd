@@ -2,7 +2,7 @@
 % Please edit documentation in R/checkinfiles.R
 \name{checkinfiles}
 \alias{checkinfiles}
-\title{Check existence and compatibility of video files}
+\title{Check compatibility of source videos}
 \usage{
 checkinfiles(f)
 }
@@ -15,4 +15,5 @@ video files for many hsv functions.
 These include confirmation of existence of the files,
 as well as checking their file extentions.
 }
+\keyword{internal}
 \keyword{utilities}

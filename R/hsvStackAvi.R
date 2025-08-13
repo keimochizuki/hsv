@@ -1,6 +1,6 @@
-#' Concatenate multiple videos horizontally/vertically
+#' Juxtapose multiple videos
 #'
-#' `hsvStackAvi` stacks input avi files horizontally or vertically
+#' `hsvStackAvi` concatenates input avi files horizontally or vertically
 #' to create a new, merged vedio with a juxtaposed view.
 #'
 #' This function creates a stacked view from multiple input avi videos.

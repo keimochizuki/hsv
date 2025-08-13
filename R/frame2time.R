@@ -11,7 +11,7 @@
 #' @param totalframes An integer. The total number of frames
 #'   in the video.
 #'
-#' @keywords utilities
+#' @keywords utilities internal
 
 frame2time <- function(
 

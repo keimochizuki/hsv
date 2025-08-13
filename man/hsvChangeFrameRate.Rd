@@ -2,7 +2,7 @@
 % Please edit documentation in R/hsvChangeFrameRate.R
 \name{hsvChangeFrameRate}
 \alias{hsvChangeFrameRate}
-\title{Overwrite frame rate information in avi header}
+\title{Overwrite frame rate in avi header}
 \usage{
 hsvChangeFrameRate(infiles, rate = NULL, scale = 1, usperframe = NULL)
 }
