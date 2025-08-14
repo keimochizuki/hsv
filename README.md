@@ -406,10 +406,10 @@ the name of the video file to `hsvClipAvi()` function.
 The clipping range should be provided to `from` and `to` arguments
 by the indices of video frames (frame number).
 For examle, you can clip the video file `input.avi`
-from 500th to 1000th frame as below.
+from 500th to 999th frame as below.
 
 ```r
-hsvClipAvi("input.avi", from = 500, to = 1000)
+hsvClipAvi("input.avi", from = 500, to = 999)
 ```
 
 The clipped file will be saved to the current working
@@ -431,7 +431,7 @@ at once to `hsvClipAvi()` function, instead of calling it
 multiple times.
 
 ```r
-hsvClipAvi(c("input1.avi", "input2.avi"), 500, 1000)
+hsvClipAvi(c("input1.avi", "input2.avi"), 500, 999)
 ```
 
 This will prevent accidental clipping mistakes
@@ -462,7 +462,7 @@ you can cut out required range of videos from multiple sources,
 and then stack them into one "overview" video file.
 
 ```r
-tmp <- hsvClipAvi(c("input1.avi", "input2.avi"), 500, 1000)
+tmp <- hsvClipAvi(c("input1.avi", "input2.avi"), 500, 999)
 hsvStackAvi(tmp, keepinfiles = FALSE)
 ```
 
@@ -480,6 +480,76 @@ with tons of temporary files created on your disc.
 also has the same option,
 but it is not used in this example.
 No one wants to remove original input files, for sure.
+
+
+### Area cropping of a video
+
+As of version 0.2.0,
+cropping of video region became available
+with `hsvCropAvi()` function.
+Imagine you have 640x480 video source.
+The following code crops the top-left quarter of your video.
+
+```r
+hsvCropAvi("input.avi", w = 320, h = 240)
+```
+
+As written in the help document,
+the vertical coordinate of an image starts from the top.
+This is why the cropped region becomes **top**-left,
+instead of bottom-left.
+
+
+### Changing the location of cropping region
+
+However, it should be rare that the targeted object
+in your video stays at the top-left region
+of the field of view.
+You can control the location of cropping region
+by additional arguments.
+
+```r
+hsvCropAvi("input.avi", 320, 240, xoffset = 160, yoffset = 240)
+```
+
+Two offsets determine the left (`xoffset`) and top (`yoffset`)
+margins to the cropped area.
+Therefore, given the size of the video source is 640x480,
+this example crops the left-right center and lower half
+of the video.
+
+
+### Reading avi header
+
+A lot of meta data are engraved in the header field
+of an avi file.
+These information can be obtained using `hsvGetAviHeader()` function.
+This is useful especially when you are suspicious of
+the legitimacy of the video recording.
+
+```r
+hsvGetAviHeader("input.avi", verbose = TRUE)
+```
+
+By activating `verbose` argument,
+header information will be printed onto the console
+in addition to the invisible return value from the function.
+
+
+### Converting avi file to mp4 format
+
+When you use videos on your presentation,
+there are times that mpeg4 compression is more handy
+than raw avi format.
+Such conversions can be easily done by `hsvAviToMp4()` function.
+
+```r
+hsvAviToMp4("input.avi")
+```
+
+This often reduces the possibility of playback troubles
+related to video codec, type of compression,
+playback rate, and so on.
 
 
 ### Further expertise

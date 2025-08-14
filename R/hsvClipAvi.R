@@ -46,7 +46,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' hsvClipAvi("input.avi", from = 1000, to = 1999)
+#' hsvClipAvi("input.avi", from = 500, to = 999)
 #' }
 #'
 #' @keywords utilities

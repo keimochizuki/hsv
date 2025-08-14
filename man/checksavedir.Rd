@@ -9,6 +9,10 @@ checksavedir(d)
 \arguments{
 \item{d}{A string. The name of the directory.}
 }
+\value{
+A string. The name of the checked
+(or created) directory.
+}
 \description{
 \code{checksavedir()} checks for the existence of a directory
 where output files from hsv functions are saved.

@@ -6,6 +6,9 @@
 #'
 #' @param d A string. The name of the directory.
 #'
+#' @return A string. The name of the checked
+#'   (or created) directory.
+#'
 #' @keywords utilities internal
 
 checksavedir <- function(

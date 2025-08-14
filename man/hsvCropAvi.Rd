@@ -75,7 +75,7 @@ the \emph{top} margin (instead of bottom) to the cropped region.
 }
 \examples{
 \dontrun{
-hsvCropAvi("input.avi", 480, 360)
+hsvCropAvi("input.avi", w = 320, h = 240)
 }
 
 }
