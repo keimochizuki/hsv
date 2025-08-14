@@ -1,6 +1,6 @@
 #' Check compatibility of source videos
 #'
-#' `checkinfiles()` performs routine checks of input
+#' [checkinfiles()] performs routine checks of input
 #' video files for many hsv functions.
 #' These include confirmation of existence of the files,
 #' as well as checking their file extentions.

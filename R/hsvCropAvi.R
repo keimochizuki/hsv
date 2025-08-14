@@ -1,6 +1,6 @@
 #' Crop a region of video area
 #'
-#' `hsvCropAvi()` extracts designated spatial region of videos
+#' [hsvCropAvi()] extracts designated spatial region of videos
 #' and create new avi files from input sources.
 #'
 #' This function crops designated area in the input avi files.

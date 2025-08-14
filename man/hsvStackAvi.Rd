@@ -58,7 +58,7 @@ you want to save the output file(s)}
 A string. The name of the created avi file.
 }
 \description{
-\code{hsvStackAvi} concatenates input avi files horizontally or vertically
+\code{\link[=hsvStackAvi]{hsvStackAvi()}} concatenates input avi files horizontally or vertically
 to create a new, merged vedio with a juxtaposed view.
 }
 \details{

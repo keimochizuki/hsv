@@ -218,7 +218,7 @@ as usual.
 Help for each function is also available with `?` operator.
 
 ```r
-?hsvChangeFrameRate
+?hsvChangeAviFps
 ```
 
 

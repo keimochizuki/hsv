@@ -36,7 +36,7 @@ you want to save the output file(s)}
 A string. The names of the created avi file.
 }
 \description{
-\code{hsvClipAvi()} extracts designated time range of videos
+\code{\link[=hsvClipAvi]{hsvClipAvi()}} extracts designated time range of videos
 and create new avi files from input sources.
 }
 \details{

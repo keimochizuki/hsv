@@ -17,7 +17,7 @@ on the console lines.}
 A list. Extracted header information.
 }
 \description{
-\code{hsvGetAviHeader()} extracts header information of
+\code{\link[=hsvGetAviHeader]{hsvGetAviHeader()}} extracts header information of
 the first video stream in an avi file.
 }
 \details{

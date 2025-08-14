@@ -1,6 +1,6 @@
 #' Check output directory
 #'
-#' `checksavedir()` checks for the existence of a directory
+#' [checksavedir()] checks for the existence of a directory
 #' where output files from hsv functions are saved.
 #' If such a directory does not exist, new one is created.
 #'

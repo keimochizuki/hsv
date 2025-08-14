@@ -15,7 +15,7 @@ frame2time(i, framerate, totalframes)
 in the video.}
 }
 \description{
-\code{frame2time()} converts index of video frame (frame number)
+\code{\link[=frame2time]{frame2time()}} converts index of video frame (frame number)
 to timecode expression like hh:mm:ss.ms
 based on the designated frame rate.
 If the index exceeds the existing frame,

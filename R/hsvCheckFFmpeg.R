@@ -1,6 +1,6 @@
 #' Check FFmpeg availability
 #'
-#' `hsvCheckFFmpeg()` checks whether `ffmpeg` command is
+#' [hsvCheckFFmpeg()] checks whether `ffmpeg` command is
 #' available on the system.
 #'
 #' Since video editing of hsv package is actually performed

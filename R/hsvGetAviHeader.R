@@ -1,6 +1,6 @@
 #' Read out avi header
 #'
-#' `hsvGetAviHeader()` extracts header information of
+#' [hsvGetAviHeader()] extracts header information of
 #' the first video stream in an avi file.
 #'
 #' An avi file starts with a header data with a predetermined

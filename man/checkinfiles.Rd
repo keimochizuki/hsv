@@ -10,7 +10,7 @@ checkinfiles(f)
 \item{f}{Strings. The names of the video files.}
 }
 \description{
-\code{checkinfiles()} performs routine checks of input
+\code{\link[=checkinfiles]{checkinfiles()}} performs routine checks of input
 video files for many hsv functions.
 These include confirmation of existence of the files,
 as well as checking their file extentions.

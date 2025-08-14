@@ -10,11 +10,11 @@ callffmpeg(cmd)
 \item{cmd}{A string. The command passed to FFmpeg.}
 }
 \description{
-\code{callffmpeg()} performs actual call for FFmpeg software
-using \code{system()}.
+\code{\link[=callffmpeg]{callffmpeg()}} performs actual call for FFmpeg software
+using \code{\link[base:system]{base::system()}}.
 It also generates some console outputs,
 asking the users to wait for a second,
-or telling them about errors during \code{system()} call.
+or telling them about errors during system call.
 }
 \keyword{internal}
 \keyword{utilities}

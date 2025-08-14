@@ -20,7 +20,7 @@ you want to save the output file(s)}
 Strings. The names of the created mp4 files.
 }
 \description{
-\code{hsvAviToMp4()} converts designated avi video file
+\code{\link[=hsvAviToMp4]{hsvAviToMp4()}} converts designated avi video file
 into mp4 format that can be played in various environment.
 }
 \details{

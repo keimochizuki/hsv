@@ -1,6 +1,6 @@
 #' Juxtapose multiple videos
 #'
-#' `hsvStackAvi` concatenates input avi files horizontally or vertically
+#' [hsvStackAvi()] concatenates input avi files horizontally or vertically
 #' to create a new, merged vedio with a juxtaposed view.
 #'
 #' This function creates a stacked view from multiple input avi videos.
@@ -96,7 +96,7 @@ if (length(infiles) < 2) {
 		ifelse(length(infiles) > 2, ' -map "[v]"', ''),
 		' "', outfile, '"', sep = "")
 	callffmpeg(cmd)
-	hsvChangeFrameRate(outfile, rate = framerate)
+	hsvChangeAviFps(outfile, rate = framerate)
 }
 
 if (!keepinfiles) {

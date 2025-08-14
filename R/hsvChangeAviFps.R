@@ -1,6 +1,6 @@
 #' Overwrite frame rate in avi header
 #'
-#' `hsvChangeFrameRate()` changes frame rate (and optionally
+#' [hsvChangeAviFps()] changes frame rate (and optionally
 #' real-time frame length) information engraved
 #' in header region of avi video files.
 #'
@@ -73,7 +73,7 @@
 #' In other words, no "conversion" of video data is actually
 #' required here, except for just changing the apparent speed
 #' of the inter-frame refresh.
-#' This is why [hsvChangeFrameRate()] does not use `ffmpeg`
+#' This is why [hsvChangeAviFps()] does not use `ffmpeg`
 #' but directly modify the meta information
 #' engraved in the header field.
 #' Also, it takes only a blink of an eye regardless of
@@ -94,7 +94,7 @@
 #' that were, for instance, created by other hsv functions.
 #'
 #' In addition to setting the frame rate,
-#' [hsvChangeFrameRate()] also take another argument named `usperframe`.
+#' [hsvChangeAviFps()] also take another argument named `usperframe`.
 #' If provided, this value is used to set another meta data field
 #' in the avi header.
 #' As the name indicates, this value should be the real-time
@@ -128,14 +128,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' hsvChangeFrameRate("input.avi", rate = 200, usperframe = 5000)
+#' hsvChangeAviFps("input.avi", rate = 200, usperframe = 5000)
 #' }
 #'
 #' @keywords utilities
 #'
 #' @export
 
-hsvChangeFrameRate <- function(
+hsvChangeAviFps <- function(
 
 	infiles,
 	rate = NULL,

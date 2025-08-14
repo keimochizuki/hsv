@@ -1,6 +1,6 @@
 #' Convert frame number to timecode
 #'
-#' `frame2time()` converts index of video frame (frame number)
+#' [frame2time()] converts index of video frame (frame number)
 #' to timecode expression like hh:mm:ss.ms
 #' based on the designated frame rate.
 #' If the index exceeds the existing frame,
