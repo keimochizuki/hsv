@@ -43,13 +43,13 @@
 #' @param keepinfiles A logical. Whether to keep the input files
 #'   after the conversion.
 #' @param savedir A string. The path to the directory
-#'   you want to save the output file(s)
+#'   you want to save the output file(s).
 #'
 #' @return A string. The names of the created avi file.
 #'
 #' @examples
 #' \dontrun{
-#' hsvCropAvi("input.avi", w = 320, h = 240)
+#' hsvCropAvi("video.avi", w = 320, h = 240)
 #' }
 #'
 #' @keywords utilities

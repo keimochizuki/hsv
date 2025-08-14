@@ -39,13 +39,13 @@
 #' @param keepinfiles A logical. Whether to keep the input files
 #'   after the stacking.
 #' @param savedir A string. The path to the directory
-#'   you want to save the output file(s)
+#'   you want to save the output file.
 #'
 #' @return A string. The name of the created avi file.
 #'
 #' @examples
 #' \dontrun{
-#' hsvStackAvi(c("input1.avi", "input2.avi"))
+#' hsvStackAvi(c("video1.avi", "video2.avi"))
 #' }
 #'
 #' @keywords utilities

@@ -231,13 +231,13 @@ For example, when you use `hsvClipAvi()` function to clip your avi video,
 you will see an output like below.
 
 ```console
-D:/hsv/example > ffmpeg -hide_banner -y -ss 00:00:33.000 -to 00:01:06.000 -i "input.avi" -c copy "output.avi"
-Input #0, avi, from 'input.avi':
+D:/hsv/example > ffmpeg -hide_banner -y -ss 00:00:33.000 -to 00:01:06.000 -i "video.avi" -c copy "video_1000-1999.avi"
+Input #0, avi, from 'video.avi':
   Duration: 00:16:03.86, start: 0.000000, bitrate: 74599 kb/s
   Stream #0:0: Video: rawvideo, pal8, 640x480, 74475 kb/s, 30.30 fps, 30.30 tbr, 30.30 tbn
 Stream mapping:
   Stream #0:0 -> #0:0 (copy)
-Output #0, avi, to 'output.avi':
+Output #0, avi, to 'video_1000-1999.avi':
   Metadata:
     ISFT            : Lavf61.9.107
   Stream #0:0: Video: rawvideo, pal8, 640x480, q=2-31, 74475 kb/s, 30.30 fps, 30.30 tbr, 30.30 tbn
@@ -257,7 +257,7 @@ The first line is an echo of the actual command
 that R sent to FFmpeg.
 
 ```console
-D:/hsv/example > ffmpeg -hide_banner -y -ss 00:00:33.000 -to 00:01:06.000 -i "input.avi" -c copy "output.avi"
+D:/hsv/example > ffmpeg -hide_banner -y -ss 00:00:33.000 -to 00:01:06.000 -i "video.avi" -c copy "video_1000-1999.avi"
 ```
 
 In this example, I tried to clip frames from 1000 to 1999,
@@ -277,7 +277,7 @@ This is in accord with the frame rate of the original video input,
 The next part of lines shows the properties of input.
 
 ```console
-Input #0, avi, from 'input.avi':
+Input #0, avi, from 'video.avi':
   Duration: 00:16:03.86, start: 0.000000, bitrate: 74599 kb/s
   Stream #0:0: Video: rawvideo, pal8, 640x480, 74475 kb/s, 30.30 fps, 30.30 tbr, 30.30 tbn
 ```
@@ -321,7 +321,7 @@ With a similar convention to the input,
 the properties of output file come next block of lines.
 
 ```console
-Output #0, avi, to 'output.avi':
+Output #0, avi, to 'video_1000-1999.avi':
   Metadata:
     ISFT            : Lavf61.9.107
   Stream #0:0: Video: rawvideo, pal8, 640x480, q=2-31, 74475 kb/s, 30.30 fps, 30.30 tbr, 30.30 tbn
@@ -405,11 +405,11 @@ Time clipping can be simply done by passing
 the name of the video file to `hsvClipAvi()` function.
 The clipping range should be provided to `from` and `to` arguments
 by the indices of video frames (frame number).
-For examle, you can clip the video file `input.avi`
+For examle, you can clip the video file `video.avi`
 from 500th to 999th frame as below.
 
 ```r
-hsvClipAvi("input.avi", from = 500, to = 999)
+hsvClipAvi("video.avi", from = 500, to = 999)
 ```
 
 The clipped file will be saved to the current working
@@ -431,7 +431,7 @@ at once to `hsvClipAvi()` function, instead of calling it
 multiple times.
 
 ```r
-hsvClipAvi(c("input1.avi", "input2.avi"), 500, 999)
+hsvClipAvi(c("video1.avi", "video2.avi"), 500, 999)
 ```
 
 This will prevent accidental clipping mistakes
@@ -447,7 +447,7 @@ watch a set of related videos at a glance.
 This can be achieved by `hsvStackAvi()` function as follows.
 
 ```r
-hsvStackAvi(c("input1.avi", "input2.avi"))
+hsvStackAvi(c("video1.avi", "video2.avi"))
 ```
 
 By switching the `horizontal` argument,
@@ -462,7 +462,7 @@ you can cut out required range of videos from multiple sources,
 and then stack them into one "overview" video file.
 
 ```r
-tmp <- hsvClipAvi(c("input1.avi", "input2.avi"), 500, 999)
+tmp <- hsvClipAvi(c("video1.avi", "video2.avi"), 500, 999)
 hsvStackAvi(tmp, keepinfiles = FALSE)
 ```
 
@@ -491,7 +491,7 @@ Imagine you have 640x480 video source.
 The following code crops the top-left quarter of your video.
 
 ```r
-hsvCropAvi("input.avi", w = 320, h = 240)
+hsvCropAvi("video.avi", w = 320, h = 240)
 ```
 
 As written in the help document,
@@ -509,7 +509,7 @@ You can control the location of cropping region
 by additional arguments.
 
 ```r
-hsvCropAvi("input.avi", 320, 240, xoffset = 160, yoffset = 240)
+hsvCropAvi("video.avi", 320, 240, xoffset = 160, yoffset = 240)
 ```
 
 Two offsets determine the left (`xoffset`) and top (`yoffset`)
@@ -528,7 +528,7 @@ This is useful especially when you are suspicious of
 the legitimacy of the video recording.
 
 ```r
-hsvGetAviHeader("input.avi", verbose = TRUE)
+hsvGetAviHeader("video.avi", verbose = TRUE)
 ```
 
 By activating `verbose` argument,
@@ -544,7 +544,7 @@ than raw avi format.
 Such conversions can be easily done by `hsvAviToMp4()` function.
 
 ```r
-hsvAviToMp4("input.avi")
+hsvAviToMp4("video.avi")
 ```
 
 This often reduces the possibility of playback troubles

@@ -52,7 +52,7 @@ with the designated suffix.}
 after the stacking.}
 
 \item{savedir}{A string. The path to the directory
-you want to save the output file(s)}
+you want to save the output file.}
 }
 \value{
 A string. The name of the created avi file.

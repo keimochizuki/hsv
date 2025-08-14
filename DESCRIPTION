@@ -23,7 +23,7 @@ License: GPL (>= 3)
 URL: https://github.com/keimochizuki/hsv
 BugReports: https://github.com/keimochizuki/hsv/issues
 Imports:
-	utils
+	utils, graphics, grDevices
 Suggests:
 	testthat
 Encoding: UTF-8

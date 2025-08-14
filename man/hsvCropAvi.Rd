@@ -41,7 +41,7 @@ to make those for the outputs.}
 after the conversion.}
 
 \item{savedir}{A string. The path to the directory
-you want to save the output file(s)}
+you want to save the output file(s).}
 }
 \value{
 A string. The names of the created avi file.

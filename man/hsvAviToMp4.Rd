@@ -14,7 +14,7 @@ you want to convert into mp4.}
 after the conversion.}
 
 \item{savedir}{A string. The path to the directory
-you want to save the output file(s)}
+you want to save the output file(s).}
 }
 \value{
 Strings. The names of the created mp4 files.

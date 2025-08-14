@@ -128,7 +128,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' hsvChangeAviFps("input.avi", rate = 200, usperframe = 5000)
+#' hsvChangeAviFps("video.avi", rate = 200, usperframe = 5000)
 #' }
 #'
 #' @keywords utilities

@@ -27,13 +27,13 @@
 #' @param keepinfiles A logical. Whether to keep the input files
 #'   after the conversion.
 #' @param savedir A string. The path to the directory
-#'   you want to save the output file(s)
+#'   you want to save the output file(s).
 #'
 #' @return Strings. The names of the created mp4 files.
 #'
 #' @examples
 #' \dontrun{
-#' hsvAviToMp4("input.avi")
+#' hsvAviToMp4("video.avi")
 #' }
 #'
 #' @keywords utilities
