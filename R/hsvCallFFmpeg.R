@@ -1,16 +1,21 @@
-#' Call FFmpeg with a given command
+#' Call FFmpeg with arbitrary command
 #'
-#' [callffmpeg()] performs actual call for FFmpeg software
+#' [hsvCallFFmpeg()] performs actual call for FFmpeg software
 #' using [base::system()].
 #' It also generates some console outputs,
 #' asking the users to wait for a second,
 #' or telling them about errors during system call.
+#' This function can be used to perform arbitrary FFmpeg call
+#' using complex filter settings or any other additional parameters
+#' which are not currently supported in hsv package.
 #'
 #' @param cmd A string. The command passed to FFmpeg.
 #'
-#' @keywords utilities internal
+#' @keywords utilities
+#'
+#' @export
 
-callffmpeg <- function(
+hsvCallFFmpeg <- function(
 
 	cmd
 

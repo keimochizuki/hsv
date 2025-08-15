@@ -77,7 +77,7 @@ for (r in 1:2) {
 	cat("\n")
 	utils::flush.console()
 
-	callffmpeg(paste('-r 200 -i "', infiles, '" ',
+	hsvCallFFmpeg(paste('-r 200 -i "', infiles, '" ',
 		'-vcodec mjpeg -qscale 0 "', outfiles[r], '"', sep = ""))
 }
 

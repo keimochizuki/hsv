@@ -98,7 +98,7 @@ for (i in seq(along = infiles)) {
 		'" -vf crop=', paste(w, h, xoffset, yoffset, sep = ":"),
 		' -codec:v libx264 -pix_fmt yuv420p -crf ', crf,
 		' "', outfiles[i], '"', sep = "")
-	callffmpeg(cmd)
+	hsvCallFFmpeg(cmd)
 }
 
 if (!keepinfiles) {

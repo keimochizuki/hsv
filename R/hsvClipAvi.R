@@ -80,7 +80,7 @@ for (i in seq(along = infiles)) {
 		' -to ', frame2time(to + 1, fr, tf),
 		' -i "', infiles[i],
 		'" -c copy "', outfiles[i], '"', sep = "")
-	callffmpeg(cmd)
+	hsvCallFFmpeg(cmd)
 
 	l <- to - from + 1
 	tf <- hsvGetAviHeader(outfiles[i])$`Total Frames`

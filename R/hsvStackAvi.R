@@ -87,7 +87,7 @@ if (length(infiles) < 2) {
 		' -filter_complex "', filter, '"',
 		ifelse(length(infiles) > 2, ' -map "[v]"', ''),
 		' "', outfile, '"', sep = "")
-	callffmpeg(cmd)
+	hsvCallFFmpeg(cmd)
 }
 
 if (!keepinfiles) {

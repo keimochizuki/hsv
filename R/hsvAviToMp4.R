@@ -55,7 +55,7 @@ outfiles <- sub("\\.avi$", "\\.mp4", basename(infiles), ignore.case = TRUE)
 outfiles <- file.path(savedir, outfiles)
 
 for (i in seq(along = infiles)) {
-	callffmpeg(paste('-i "', infiles[i], '" "', outfiles[i], '"', sep = ""))
+	hsvCallFFmpeg(paste('-i "', infiles[i], '" "', outfiles[i], '"', sep = ""))
 }
 
 if (!keepinfiles) {
