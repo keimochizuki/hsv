@@ -7,9 +7,7 @@
 hsvStackAvi(
   infiles,
   horizontal = TRUE,
-  addfilt = "",
   crf = 20,
-  framerate = 50,
   outfile = "",
   suffix = "stacked",
   keepinfiles = TRUE,
@@ -22,9 +20,6 @@ hsvStackAvi(
 \item{horizontal}{A logical. Whether to stack the videos horizontally.
 If set FALSE, videos are vertically stacked.}
 
-\item{addfilt}{A string. Additional filter setting passed to
-\code{-filter_complex} option of \code{ffmpeg}.}
-
 \item{crf}{An integer. The constant rate factor (crf),
 i.e., a value to determine the quality of the converted video
 in FFmpeg (ranging from 0 to 51).
@@ -32,8 +27,6 @@ Smaller value indicate high quality video.
 The default value for original \code{ffmpeg} command is 23.
 Therefore, the default for this function is quality-oriented,
 in exchange for possible larger file size.}
-
-\item{framerate}{An integer. The frame rate of the output avi file.}
 
 \item{outfile}{A string. The name of the output avi file.
 If provided, this parameter override \code{suffix} argument
@@ -73,7 +66,7 @@ through optional arguments.
 }
 \examples{
 \dontrun{
-hsvStackAvi(c("input1.avi", "input2.avi"))
+hsvStackAvi(c("video1.avi", "video2.avi"))
 }
 
 }

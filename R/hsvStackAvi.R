@@ -15,8 +15,6 @@
 #' @param infiles Strings. The names of the avi files you want to merge.
 #' @param horizontal A logical. Whether to stack the videos horizontally.
 #'   If set FALSE, videos are vertically stacked.
-#' @param addfilt A string. Additional filter setting passed to
-#'   `-filter_complex` option of `ffmpeg`.
 #' @param crf An integer. The constant rate factor (crf),
 #'   i.e., a value to determine the quality of the converted video
 #'   in FFmpeg (ranging from 0 to 51).
@@ -24,7 +22,6 @@
 #'   The default value for original `ffmpeg` command is 23.
 #'   Therefore, the default for this function is quality-oriented,
 #'   in exchange for possible larger file size.
-#' @param framerate An integer. The frame rate of the output avi file.
 #' @param outfile A string. The name of the output avi file.
 #'   If provided, this parameter override `suffix` argument
 #'   that is normally used to create output file names
@@ -56,9 +53,7 @@ hsvStackAvi <- function(
 
 	infiles,
 	horizontal = TRUE,
-	addfilt = "",
 	crf = 20,
-	framerate = 50,
 	outfile = "",
 	suffix = "stacked",
 	keepinfiles = TRUE,
@@ -82,9 +77,6 @@ if (length(infiles) > 2) {
 	filter <- paste(paste("[", 0:(length(infiles) - 1), ":v]", sep = "", collapse = ""),
 		filter, "=inputs=", length(infiles), "[v]", sep = "")
 }
-if (addfilt != "") {
-	filter <- paste(filter, ",", addfilt)
-}
 
 if (length(infiles) < 2) {
 	warning("Only a single input file designated, skipping further processing")
@@ -96,7 +88,6 @@ if (length(infiles) < 2) {
 		ifelse(length(infiles) > 2, ' -map "[v]"', ''),
 		' "', outfile, '"', sep = "")
 	callffmpeg(cmd)
-	hsvChangeAviFps(outfile, rate = framerate)
 }
 
 if (!keepinfiles) {
