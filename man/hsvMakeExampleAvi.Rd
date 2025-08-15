@@ -2,7 +2,7 @@
 % Please edit documentation in R/hsvMakeExampleAvi.R
 \name{hsvMakeExampleAvi}
 \alias{hsvMakeExampleAvi}
-\title{Make example avi videos}
+\title{Make example avi files}
 \usage{
 hsvMakeExampleAvi(savedir = ".")
 }
@@ -22,7 +22,7 @@ This may be handy because you do not need to
 worry about these test files.
 There are no worries about accidental file crash,
 leakage of your experimental results,
-intrusion of privacy, or whatever.
+intrusion of other people's privacy, or whatever.
 }
 \examples{
 \dontrun{

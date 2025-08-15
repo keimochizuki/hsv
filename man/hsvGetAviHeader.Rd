@@ -35,7 +35,7 @@ which would be useful in confirming video format and properties.
 }
 \examples{
 \dontrun{
-hsvGetAviHeader("input.avi", verbose = TRUE)
+hsvGetAviHeader("video.avi", verbose = TRUE)
 }
 
 }

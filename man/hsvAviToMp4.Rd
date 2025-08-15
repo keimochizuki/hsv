@@ -45,7 +45,7 @@ avi-to-mp4 conversion through FFmpeg.
 }
 \examples{
 \dontrun{
-hsvAviToMp4("input.avi")
+hsvAviToMp4("video.avi")
 }
 
 }

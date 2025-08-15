@@ -68,7 +68,7 @@ since all the frames are technically keyframes in such a case.
 }
 \examples{
 \dontrun{
-hsvClipAvi("input.avi", from = 500, to = 999)
+hsvClipAvi("video.avi", from = 500, to = 999)
 }
 
 }
