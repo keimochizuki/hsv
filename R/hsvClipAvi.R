@@ -81,6 +81,12 @@ for (i in seq(along = infiles)) {
 		' -i "', infiles[i],
 		'" -c copy "', outfiles[i], '"', sep = "")
 	callffmpeg(cmd)
+
+	l <- to - from + 1
+	tf <- hsvGetAviHeader(outfiles[i])$`Total Frames`
+	if (l != tf) {
+		warning(paste("Number of extracted frames differs", l - tf, "from the intended length"))
+	}
 }
 
 if (!keepinfiles) {

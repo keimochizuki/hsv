@@ -21,6 +21,7 @@ frame2time <- function(
 
 ) {
 
+i <- i - 1
 if (i < 0) {
 	i <- 0
 	warning("Negative frame index designated, using the initial frame instead")

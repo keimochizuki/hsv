@@ -1,4 +1,4 @@
-#' Make example avi videos
+#' Make example avi files
 #'
 #' [hsvMakeExampleAvi()] creates a set of two
 #' high-speed videos in avi format.
@@ -8,7 +8,7 @@
 #' worry about these test files.
 #' There are no worries about accidental file crash,
 #' leakage of your experimental results,
-#' intrusion of privacy, or whatever.
+#' intrusion of other people's privacy, or whatever.
 #'
 #' @param savedir A string. The path to the directory
 #'   you want to save the output files.
@@ -31,12 +31,9 @@ hsvMakeExampleAvi <- function(
 ) {
 
 savedir <- checksavedir(savedir)
-
 outfiles <- file.path(savedir, sprintf("video%d.avi", 1:2))
 
-set.seed(1)
 n <- 1000
-
 dat <- cbind(
 	x = sin(seq(0, 10 * pi, length.out = n)),
 	y = cos(seq(0, 8 * pi, length.out = n)),
@@ -66,8 +63,8 @@ for (r in 1:2) {
 		graphics::points(tmp$x[i], tmp$y[i], pch = 16, cex = 1.5)
 		graphics::text(at[1], at[2], sprintf("frame = %04d", i), adj = c(0, 0))
 	}
-
 	pointspsp(1)	
+
 	for (f in 2:n) {
 		plotpsp()
 		pointspsp(f)
