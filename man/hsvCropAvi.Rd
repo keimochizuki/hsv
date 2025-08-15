@@ -10,6 +10,7 @@ hsvCropAvi(
   h,
   xoffset = 0,
   yoffset = 0,
+  crf = 20,
   suffix = paste(w, h, sep = "x"),
   keepinfiles = TRUE,
   savedir = "."
@@ -32,6 +33,14 @@ toward y-axis before cropping region starts.
 Since the y-axis starts from the upper end in image processing,
 this value equals to the top (instead of bottom)
 margin omitted from original videos.}
+
+\item{crf}{An integer. The constant rate factor (crf),
+i.e., a value to determine the quality of the converted video
+in FFmpeg (ranging from 0 to 51).
+Smaller value indicate high quality video.
+The default value for original \code{ffmpeg} command is 23.
+Therefore, the default for this function is quality-oriented,
+in exchange for possible larger file size.}
 
 \item{suffix}{A string. The suffix to the file names
 concatenated to the names of input avi files
@@ -75,7 +84,7 @@ the \emph{top} margin (instead of bottom) to the cropped region.
 }
 \examples{
 \dontrun{
-hsvCropAvi("input.avi", w = 320, h = 240)
+hsvCropAvi("video.avi", w = 320, h = 240)
 }
 
 }

@@ -37,6 +37,13 @@
 #'   Since the y-axis starts from the upper end in image processing,
 #'   this value equals to the top (instead of bottom)
 #'   margin omitted from original videos.
+#' @param crf An integer. The constant rate factor (crf),
+#'   i.e., a value to determine the quality of the converted video
+#'   in FFmpeg (ranging from 0 to 51).
+#'   Smaller value indicate high quality video.
+#'   The default value for original `ffmpeg` command is 23.
+#'   Therefore, the default for this function is quality-oriented,
+#'   in exchange for possible larger file size.
 #' @param suffix A string. The suffix to the file names
 #'   concatenated to the names of input avi files
 #'   to make those for the outputs.
@@ -63,6 +70,7 @@ hsvCropAvi <- function(
 	h,
 	xoffset = 0,
 	yoffset = 0,
+	crf = 20,
 	suffix = paste(w, h, sep = "x"),
 	keepinfiles = TRUE,
 	savedir = "."
@@ -88,6 +96,7 @@ for (i in seq(along = infiles)) {
 	cmd <- paste(
 		'-i "', infiles[i],
 		'" -vf crop=', paste(w, h, xoffset, yoffset, sep = ":"),
+		' -codec:v libx264 -pix_fmt yuv420p -crf ', crf,
 		' "', outfiles[i], '"', sep = "")
 	callffmpeg(cmd)
 }
