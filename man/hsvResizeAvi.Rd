@@ -19,14 +19,15 @@ hsvResizeAvi(
 \item{infiles}{Strings. The names of the avi files you want to resize.}
 
 \item{w}{An integer. The width of the resized video.
-Default -2, meaning to match the height while keeping the aspect ratio.
+Default \code{-2}, meaning to match to the height
+while keeping the aspect ratio.
 Note that odd resolution is not supported due to
 the limitation of video compression format.}
 
 \item{h}{An integer. The height of the resized video.
-Default -2, meaning to match the width while keeping the aspect ratio.
-Note that odd resolution is not supported due to
-the limitation of video compression format.}
+Default \code{-2}, meaning to match to the width
+while keeping the aspect ratio.
+Odd value is not supported as in the case of the width.}
 
 \item{crf}{An integer. The constant rate factor (crf),
 i.e., a value to determine the quality of the converted video
@@ -52,11 +53,36 @@ A string. The names of the created avi file.
 \description{
 \code{\link[=hsvResizeAvi]{hsvResizeAvi()}} changes the video resolution to
 fit designated width or height.
+}
+\details{
+This function enlarges or shrinks input videos
+to have designated width and/or height.
 If either width or height is provided,
 the undesignated side will be automatically determined
 to keep the original aspect ratio.
 If both are provided, the aspect ratio changes
 in the resulting video file(s).
+
+The default values \code{-2} for \code{w} and \code{h} arguments
+may seem rather strange to users.
+Originally, FFmpeg software had size specification keyword \code{-1}
+for automatic sizing while keeping the aspect ratio.
+(Such use of \code{-1}, i.e., toggling exceptional behavior by
+assigning essentially nonsense negative value,
+would be somewhat common in programming, isn't it?)
+However, as a result of calculation,
+the automatically-applied width or height could become
+an odd number.
+Because some video formats do not support odd width or height,
+this could be a cause of an error during compression.
+Therefore, another option \code{-2} was introduced,
+which automatically increments incidental odd width or height
+by one to avoid such an error.
+
+Of course, directly assigning odd numbers to \code{w} and \code{h}
+is not worthwhile, too.
+In such cases, \code{hsvResizeAvi()} automatically add one(s)
+to the targeted resolution of the videos.
 }
 \examples{
 \dontrun{

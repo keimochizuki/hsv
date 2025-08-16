@@ -19,9 +19,12 @@ hsvCropAvi(
 \arguments{
 \item{infiles}{Strings. The names of the avi files you want to crop.}
 
-\item{w}{An integer. The width of the cropping region in pixels.}
+\item{w}{An integer. The width of the cropping region in pixels.
+Only even numbers are allowed.
+See Details section for more information on this limitation.}
 
-\item{h}{An integer. The height of the cropping region in pixels.}
+\item{h}{An integer. The height of the cropping region in pixels.
+Only even numbers are allowed as in the case of the width.}
 
 \item{xoffset}{An integer. The number of pixels skipped
 toward x-axis before cropping region starts.
@@ -81,6 +84,17 @@ as a tradition of image processing,
 the origin of an image normally exists at the \emph{top}-left corner.
 Therefore, the \code{yoffset} parameter determines
 the \emph{top} margin (instead of bottom) to the cropped region.
+
+Note that width and height of an avi file cannot become
+odd numbers in some video compression formats
+such as \code{h.264} and \code{mpeg4}.
+This is due to the limitation in compression algorithm.
+Therefore, if the cropped video happens to have
+odd width or height,
+users need to increase the cropping area by 1 to avoid
+compression errors.
+\code{\link[=hsvCropAvi]{hsvCropAvi()}} automatically does this trick
+when designated \code{w} or \code{h} are odd number(s).
 }
 \examples{
 \dontrun{

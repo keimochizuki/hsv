@@ -25,9 +25,23 @@
 #' Therefore, the `yoffset` parameter determines
 #' the *top* margin (instead of bottom) to the cropped region.
 #'
+#' Note that width and height of an avi file cannot become
+#' odd numbers in some video compression formats
+#' such as `h.264` and `mpeg4`.
+#' This is due to the limitation in compression algorithm.
+#' Therefore, if the cropped video happens to have
+#' odd width or height,
+#' users need to increase the cropping area by 1 to avoid
+#' compression errors.
+#' [hsvCropAvi()] automatically does this trick
+#' when designated `w` or `h` are odd number(s).
+#'
 #' @param infiles Strings. The names of the avi files you want to crop.
 #' @param w An integer. The width of the cropping region in pixels.
+#'   Only even numbers are allowed.
+#'   See Details section for more information on this limitation.
 #' @param h An integer. The height of the cropping region in pixels.
+#'   Only even numbers are allowed as in the case of the width.
 #' @param xoffset An integer. The number of pixels skipped
 #'   toward x-axis before cropping region starts.
 #'   This value equals to the left margin omitted
@@ -83,10 +97,15 @@ savedir <- checksavedir(savedir)
 outfiles <- sub("\\.avi$", sprintf("_%s.avi", suffix), basename(infiles), ignore.case = TRUE)
 outfiles <- file.path(savedir, outfiles)
 
+w <- w + (w %% 2)
+h <- h + (h %% 2)
+
 for (i in seq(along = infiles)) {
 	hd <- hsvGetAviHeader(infiles[i])
 	if ((w > hd$Width) || (h > hd$Height)) {
-		stop("Protruding cropping area designated, stopping further processing")
+		warning(paste("Protruding cropping area designated, skipping", infiles[i]))
+		outfiles[i] <- infiles[i]
+		next
 	}
 	xoffset <- ifelse(xoffset < 0, 0, xoffset)
 	xoffset <- min(xoffset, hd$Width - w - 1)
