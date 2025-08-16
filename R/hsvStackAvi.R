@@ -73,12 +73,11 @@ if (length(infiles) < 2) {
 	return(invisible(infiles))
 }
 
-padding <- rep(padding, length(infiles) - 1)
+padding <- rep(padding, length.out = length(infiles) - 1)
 if (sum(padding) %% 2) {
 	i <- min(which(padding != 0))
 	padding[i] <- padding[i] + 1
 }
-print(padding)
 
 if (col %in% grDevices::colors()) {
 	col <- grDevices::rgb(t(grDevices::col2rgb("red")), maxColorValue = 255)
