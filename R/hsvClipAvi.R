@@ -72,8 +72,8 @@ outfiles <- file.path(savedir, outfiles)
 
 for (i in seq(along = infiles)) {
 	hd <- hsvGetAviHeader(infiles[i])
-	fr <- hd$Rate / hd$Scale
-	tf <- hd$`Total Frames`
+	fr <- hd[[31]] / hd[[30]] # Rate / Scale
+	tf <- hd[[33]] # Length in avi video stream header
 
 	cmd <- paste(
 		'-ss ', frame2time(from, fr, tf),
@@ -83,7 +83,7 @@ for (i in seq(along = infiles)) {
 	hsvCallFFmpeg(cmd)
 
 	l <- to - from + 1
-	tf <- hsvGetAviHeader(outfiles[i])$`Total Frames`
+	tf <- hsvGetAviHeader(outfiles[i])[[33]]
 	if (l != tf) {
 		warning(paste("Number of extracted frames differs", l - tf, "from the intended length"))
 	}
