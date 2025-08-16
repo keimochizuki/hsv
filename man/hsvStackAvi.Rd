@@ -7,6 +7,8 @@
 hsvStackAvi(
   infiles,
   horizontal = TRUE,
+  padding = 0,
+  col = "#000000",
   crf = 20,
   outfile = "",
   suffix = "stacked",
@@ -19,6 +21,13 @@ hsvStackAvi(
 
 \item{horizontal}{A logical. Whether to stack the videos horizontally.
 If set FALSE, videos are vertically stacked.}
+
+\item{padding}{Integers of length \code{length(infiles) - 1}.
+The sizes of paddings inserted between videos.}
+
+\item{col}{A string. The color of the padding regions.
+This can be provided either as the name of the color or
+in hexadecimal form (like \verb{#000000}).}
 
 \item{crf}{An integer. The constant rate factor (crf),
 i.e., a value to determine the quality of the converted video
