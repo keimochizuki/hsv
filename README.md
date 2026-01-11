@@ -223,7 +223,7 @@ Help for each function is also available with `?` operator.
 
 
 
-## Tips for reading FFmpeg output
+## Tips in reading FFmpeg output
 
 When you call FFmpeg (either directly on the commandline or through hsv package),
 a verbose output message is typically returned.
@@ -506,7 +506,7 @@ However, it should be rare that the targeted object
 in your video stays at the top-left region
 of the field of view.
 You can control the location of cropping region
-by additional arguments.
+by additional arguments for spatial offset.
 
 ```r
 hsvCropAvi("video.avi", 320, 240, xoffset = 160, yoffset = 240)
@@ -550,6 +550,24 @@ hsvAviToMp4("video.avi")
 This often reduces the possibility of playback troubles
 related to video codec, type of compression,
 playback rate, and so on.
+
+
+### Extracting png images from an avi movie
+
+Either during your analysis or academic publication,
+you may need to use still images instead of original movie file.
+This package support such usage with `hsvCaptureFrame()` function.
+
+```r
+hsvCaptureFrame("video.avi", frames = c(1, 500, 999))
+```
+
+This function extracts designated frames of the input movie(s)
+and save them as png files.
+Multiple input files are supported to extract predetermined
+set of frames from many different files.
+This function also accept mpeg4 movie(s) as input
+for png image capturing.
 
 
 ### Further expertise

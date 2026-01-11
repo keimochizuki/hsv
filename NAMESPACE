@@ -2,6 +2,7 @@
 
 export(hsvAviToMp4)
 export(hsvCallFFmpeg)
+export(hsvCaptureFrame)
 export(hsvChangeAviFps)
 export(hsvCheckFFmpeg)
 export(hsvClipAvi)
@@ -9,5 +10,4 @@ export(hsvCropAvi)
 export(hsvGetAviHeader)
 export(hsvMakeExampleAvi)
 export(hsvResizeAvi)
-export(hsvScreenshotFrame)
 export(hsvStackAvi)

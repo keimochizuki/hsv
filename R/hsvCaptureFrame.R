@@ -1,10 +1,10 @@
-#' Screenshot video frames as png images
+#' Screenshot and save video frames as png images
 #'
-#' [hsvScreenshotFrame()] extracts designated frames of the provided
+#' [hsvCaptureFrame()] extracts designated frames of the provided
 #' movie file as png still images.
 #'
 #' @param infiles Strings. The names of the avi files you want to screenshot.
-#' @param frames Integers. The index of the frames to screenshot.
+#' @param frames Integers. The index of the frames to extract.
 #' @param suffix A string. The suffix for the names of png files
 #'   concatenated to the names of input movie files.
 #'   Should be a format string for frame numbers to enable multi-frame export.
@@ -20,14 +20,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' hsvScreenshotFrame("video.avi", frames = seq(1, 1000, by = 50))
+#' hsvCaptureFrame("video.avi", frames = seq(1, 1000, by = 50))
 #' }
 #'
 #' @keywords utilities
 #'
 #' @export
 
-hsvScreenshotFrame <- function(
+hsvCaptureFrame <- function(
 
 	infiles,
 	frames,
