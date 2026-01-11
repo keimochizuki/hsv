@@ -14,13 +14,15 @@
 checkinfiles <- function(
 
 	f,
-	ext = "\\.avi$"
+	ext = "avi"
 
 ) {
 
 if (!all(file.exists(f))) {
 	stop("Non-existing file(s) designated, stopping further processing")
 }
+
+ext <- paste(paste("\\.", ext, "$", sep = ""), collapse = "|")
 if (!all(grepl(ext, f, ignore.case = TRUE))) {
 	stop("Incompatible file(s) designated, stopping further processing")
 }

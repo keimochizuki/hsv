@@ -37,7 +37,7 @@ hsvCaptureFrame <- function(
 
 ) {
 
-checkinfiles(infiles, "\\.avi$|\\.mp4$")
+checkinfiles(infiles, c("avi", "mp4"))
 savedir <- checksavedir(savedir)
 
 outfiles <- sub("\\.avi$|\\.mp4$", sprintf("_%s.png", suffix), basename(infiles), ignore.case = TRUE)
@@ -51,14 +51,22 @@ outfiles <- lapply(X = outfiles, FUN = function(z) {
 })
 
 for (i in seq(along = infiles)) {
-	hd <- hsvGetAviHeader(infiles[i])
-	fr <- hd[[31]] / hd[[30]] # Rate / Scale
-	tf <- hd[[33]] # Length in avi video stream header
+	if (grepl("\\.avi$", infiles[i], ignore.case = TRUE)) {
+		hd <- hsvGetAviHeader(infiles[i])
+		fr <- hd[[31]] / hd[[30]] # Rate / Scale
+		tf <- hd[[33]] # Length in avi video stream header
+	} else if (grepl("\\.mp4$", infiles[i], ignore.case = TRUE)) {
+		hd <- hsvGetMp4Header(infiles[i])
+		fr <- eval(parse(text = hd$r_frame_rate))
+		tf <- as.integer(hd$nb_frames)
+	} else {
+		stop(paste("Header information not available for", infiles[i]))
+	}
 
 	cmd <- paste(
 		'-ss ', sapply(X = frames, FUN = frame2time, framerate = fr, totalframes = tf),
 		' -i "', infiles[i],
-		'" -frames:v 1 "', outfiles[[i]], '"', sep = "")
+		'" -vframes 1 "', outfiles[[i]], '"', sep = "")
 	sapply(X = cmd, FUN = hsvCallFFmpeg)
 	print(cmd)
 }

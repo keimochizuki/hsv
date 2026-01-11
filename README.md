@@ -140,6 +140,9 @@ This process may better be done as administrator, too,
 but it depends on your usage.
 
 ```r
+# This command will seem to halt your R for a few seconds
+#   while install_github() works through the internet.
+# Just wait still for a moment, please.
 devtools::install_github("keimochizuki/hsv")
 ```
 

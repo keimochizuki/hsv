@@ -4,7 +4,7 @@
 \alias{checkinfiles}
 \title{Check compatibility of source videos}
 \usage{
-checkinfiles(f, ext = "\\\\.avi$")
+checkinfiles(f, ext = "avi")
 }
 \arguments{
 \item{f}{Strings. The names of the video files.}
