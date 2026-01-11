@@ -192,7 +192,7 @@ Start R, then use `library()` to load hsv package
 like when you use ordinary packages.
 
 ```r
-library("hsv")
+library(hsv)
 ```
 
 

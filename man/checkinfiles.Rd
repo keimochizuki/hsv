@@ -4,10 +4,13 @@
 \alias{checkinfiles}
 \title{Check compatibility of source videos}
 \usage{
-checkinfiles(f)
+checkinfiles(f, ext = "\\\\.avi$")
 }
 \arguments{
 \item{f}{Strings. The names of the video files.}
+
+\item{ext}{A string. A regular expression pattern for
+file extensions allowed.}
 }
 \description{
 \code{\link[=checkinfiles]{checkinfiles()}} performs routine checks of input

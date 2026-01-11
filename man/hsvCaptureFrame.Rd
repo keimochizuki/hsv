@@ -2,7 +2,7 @@
 % Please edit documentation in R/hsvCaptureFrame.R
 \name{hsvCaptureFrame}
 \alias{hsvCaptureFrame}
-\title{Screenshot and save video frames as png images}
+\title{Extract video frames as png images}
 \usage{
 hsvCaptureFrame(
   infiles,

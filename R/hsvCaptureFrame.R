@@ -1,4 +1,4 @@
-#' Screenshot and save video frames as png images
+#' Extract video frames as png images
 #'
 #' [hsvCaptureFrame()] extracts designated frames of the provided
 #' movie file as png still images.
@@ -37,7 +37,7 @@ hsvCaptureFrame <- function(
 
 ) {
 
-checkinfiles(infiles)
+checkinfiles(infiles, "\\.avi$|\\.mp4$")
 savedir <- checksavedir(savedir)
 
 outfiles <- sub("\\.avi$|\\.mp4$", sprintf("_%s.png", suffix), basename(infiles), ignore.case = TRUE)
