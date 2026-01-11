@@ -21,15 +21,15 @@ frame2time <- function(
 
 ) {
 
-i <- i - 1
-if (i < 0) {
-	i <- 0
-	warning("Negative frame index designated, using the initial frame instead")
+if (i < 1) {
+	i <- 1
+	warning("Non-positive frame index designated, using the initial frame instead")
 }
 if (i > totalframes) {
 	i <- totalframes
 	warning("Frame index exceeded the total length, using the last frame instead")
 }
+i <- i - 1
 
 s <- i / framerate
 ms <- round((s - floor(s)) * 1000)

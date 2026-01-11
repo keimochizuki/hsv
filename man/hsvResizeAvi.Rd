@@ -48,7 +48,7 @@ after the conversion.}
 you want to save the output file(s).}
 }
 \value{
-A string. The names of the created avi file.
+Strings. The names of the created avi files.
 }
 \description{
 \code{\link[=hsvResizeAvi]{hsvResizeAvi()}} changes the video resolution to

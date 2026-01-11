@@ -56,7 +56,7 @@ after the conversion.}
 you want to save the output file(s).}
 }
 \value{
-A string. The names of the created avi file.
+Strings. The names of the created avi files.
 }
 \description{
 \code{\link[=hsvCropAvi]{hsvCropAvi()}} extracts designated spatial region of videos

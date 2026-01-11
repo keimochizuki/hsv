@@ -57,7 +57,7 @@
 #' @param savedir A string. The path to the directory
 #'   you want to save the output file(s).
 #'
-#' @return A string. The names of the created avi file.
+#' @return Strings. The names of the created avi files.
 #'
 #' @examples
 #' \dontrun{
