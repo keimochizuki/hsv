@@ -1,22 +1,23 @@
-#' Extract video frames as png images
+#' Extract video frames as still images
 #'
 #' [hsvCaptureFrame()] extracts designated frames of the provided
-#' movie file as png still images.
+#' movie file as still images.
 #'
 #' @param infiles Strings. The names of the avi files you want to screenshot.
 #' @param frames Integers. The index of the frames to extract.
-#' @param suffix A string. The suffix for the names of png files
+#' @param ext A string. The extension of output image files.
+#' @param suffix A string. The suffix for the names of image files
 #'   concatenated to the names of input movie files.
 #'   Should be a format string for frame numbers to enable multi-frame export.
 #'   (e.g., "%05d" for zero-padded five-digit frame indices.)
-#'   Otherwise, export of all png files will be done with
+#'   Otherwise, export of all image files will be done with
 #'   the same filename, overwriting the previous image repeatedly.
 #' @param keepinfiles A logical. Whether to keep the input files
 #'   after the conversion.
 #' @param savedir A string. The path to the directory
 #'   you want to save the output file(s).
 #'
-#' @return A list of strings. The names of the created png files.
+#' @return A list of strings. The names of the created image files.
 #'
 #' @examples
 #' \dontrun{
@@ -31,6 +32,7 @@ hsvCaptureFrame <- function(
 
 	infiles,
 	frames,
+	ext = "png",
 	suffix = paste("%0", floor(log10(max(frames))) + 1, "d", sep = ""),
 	keepinfiles = TRUE,
 	savedir = "."
@@ -40,7 +42,7 @@ hsvCaptureFrame <- function(
 checkinfiles(infiles, c("avi", "mp4"))
 savedir <- checksavedir(savedir)
 
-outfiles <- sub("\\.avi$|\\.mp4$", sprintf("_%s.png", suffix), basename(infiles), ignore.case = TRUE)
+outfiles <- sub("\\.avi$|\\.mp4$", sprintf("_%s.%s", suffix, ext), basename(infiles), ignore.case = TRUE)
 outfiles <- file.path(savedir, outfiles)
 outfiles <- lapply(X = outfiles, FUN = function(z) {
 	if (grepl("%0*[1-9]+d", z)) {

@@ -2,11 +2,12 @@
 % Please edit documentation in R/hsvCaptureFrame.R
 \name{hsvCaptureFrame}
 \alias{hsvCaptureFrame}
-\title{Extract video frames as png images}
+\title{Extract video frames as still images}
 \usage{
 hsvCaptureFrame(
   infiles,
   frames,
+  ext = "png",
   suffix = paste("\%0", floor(log10(max(frames))) + 1, "d", sep = ""),
   keepinfiles = TRUE,
   savedir = "."
@@ -17,11 +18,13 @@ hsvCaptureFrame(
 
 \item{frames}{Integers. The index of the frames to extract.}
 
-\item{suffix}{A string. The suffix for the names of png files
+\item{ext}{A string. The extension of output image files.}
+
+\item{suffix}{A string. The suffix for the names of image files
 concatenated to the names of input movie files.
 Should be a format string for frame numbers to enable multi-frame export.
 (e.g., "\%05d" for zero-padded five-digit frame indices.)
-Otherwise, export of all png files will be done with
+Otherwise, export of all image files will be done with
 the same filename, overwriting the previous image repeatedly.}
 
 \item{keepinfiles}{A logical. Whether to keep the input files
@@ -31,11 +34,11 @@ after the conversion.}
 you want to save the output file(s).}
 }
 \value{
-A list of strings. The names of the created png files.
+A list of strings. The names of the created image files.
 }
 \description{
 \code{\link[=hsvCaptureFrame]{hsvCaptureFrame()}} extracts designated frames of the provided
-movie file as png still images.
+movie file as still images.
 }
 \examples{
 \dontrun{
