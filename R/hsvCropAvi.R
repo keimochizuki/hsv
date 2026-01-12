@@ -102,15 +102,15 @@ h <- h + (h %% 2)
 
 for (i in seq(along = infiles)) {
 	hd <- hsvGetAviHeader(infiles[i])
-	if ((w > hd$Width) || (h > hd$Height)) {
+	if ((w > hd$Stream_Width) || (h > hd$Stream_Height)) {
 		warning(paste("Protruding cropping area designated, skipping", infiles[i]))
 		outfiles[i] <- infiles[i]
 		next
 	}
 	xoffset <- ifelse(xoffset < 0, 0, xoffset)
-	xoffset <- min(xoffset, hd$Width - w - 1)
+	xoffset <- min(xoffset, hd$Stream_Width - w - 1)
 	yoffset <- ifelse(yoffset < 0, 0, yoffset)
-	yoffset <- min(yoffset, hd$Height - h - 1)
+	yoffset <- min(yoffset, hd$Stream_Height - h - 1)
 
 	cmd <- paste(
 		'-i "', infiles[i],

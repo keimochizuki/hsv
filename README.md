@@ -140,8 +140,8 @@ This process may better be done as administrator, too,
 but it depends on your usage.
 
 ```r
-# This command will seem to halt your R for a few seconds
-#   while install_github() works through the internet.
+# This command will seem to halt your R for a few seconds.
+# But it is natural behavior of install_github() function.
 # Just wait still for a moment, please.
 devtools::install_github("keimochizuki/hsv")
 ```
@@ -555,7 +555,7 @@ related to video codec, type of compression,
 playback rate, and so on.
 
 
-### Extracting png images from an avi movie
+### Extracting still images from avi video
 
 Either during your analysis or academic publication,
 you may need to use still images instead of original movie file.
@@ -571,6 +571,12 @@ Multiple input files are supported to extract predetermined
 set of frames from many different files.
 This function also accept mpeg4 movie(s) as input
 for png image capturing.
+
+Unfortunately, `hsvCaptureFrame()` sometimes fails to
+extract images due to the limitation of FFmpeg software per se.
+In such situation, the author currently bypass this problem
+by first converting the video to mp4 format,
+and then use this function to it.
 
 
 ### Further expertise

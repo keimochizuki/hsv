@@ -37,6 +37,17 @@ val <- system(cmd, intern = TRUE)
 val <- val[-c(1, length(val))]
 val <- strsplit(val, "=")
 v <- lapply(X = val, FUN = "[", 2)
+v <- lapply(X = v, FUN = function(z) {
+	if (grepl("^[[:digit:]]+$", z)) {
+		return(as.integer(z))
+	} else if (grepl("^[[:digit:].]+$", z)) {
+		return(as.numeric(z))
+	} else if (grepl("^[[:digit:]/]+$", z)) {
+		return(parse(text = z))
+	} else {
+		return(switch(z, "N/A" = NA, "true" = TRUE, "false" = FALSE, z))
+	}
+})
 names(v) <- sapply(X = val, FUN = "[", 1)
 
 if (verbose) {
