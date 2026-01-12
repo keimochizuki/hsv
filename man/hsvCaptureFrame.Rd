@@ -14,7 +14,8 @@ hsvCaptureFrame(
 )
 }
 \arguments{
-\item{infiles}{Strings. The names of the avi files you want to screenshot.}
+\item{infiles}{Strings. The names of the video files you want to
+capture images from.}
 
 \item{frames}{Integers. The index of the frames to extract.}
 
@@ -39,6 +40,34 @@ A list of strings. The names of the created image files.
 \description{
 \code{\link[=hsvCaptureFrame]{hsvCaptureFrame()}} extracts designated frames of the provided
 movie file as still images.
+}
+\details{
+When analyzing video data, you may want to take "photocopies" of
+certain frames of the source video as still images.
+Video player applications normally hold such functionality
+called "snapshot" or "screen capture".
+However, it is more handy to perform such conversion within
+your script.
+
+\code{\link[=hsvCaptureFrame]{hsvCaptureFrame()}} helps achieve this goal.
+This function simply uses built-in format conversion utility of
+original FFmpeg software.
+Extracted image format is automatically set by the extension
+of output files designated by \code{ext} argument.
+
+Unfortunately, after some while since this function was implemented,
+the author recognized that the conversion process sometimes fails.
+This failure is totally input-dependent.
+For some video files, the output becomes complete blank images
+with the same width and height to the source video.
+Since this is the problem of FFmpeg per se, the author has no way
+to personally deal with this phenomenon.
+(It is really strange that \code{ffmpeg} fails to extract images from
+the video source, with which she can perform clipping, cropping,
+or any other video-based handling as usual.)
+Currently, the valid and easy detour is to first convert the source
+avi video to mpeg4 format with \code{\link[=hsvAviToMp4]{hsvAviToMp4()}},
+and then use \code{\link[=hsvCaptureFrame]{hsvCaptureFrame()}} to it.
 }
 \examples{
 \dontrun{
